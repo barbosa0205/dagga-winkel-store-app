@@ -1,0 +1,17 @@
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    min-height: 2.8rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 1rem;
+
+    & > .search {
+        width: 80%;
+    }
+
+    & > i {
+        font-size: 2rem;
+    }
+}
