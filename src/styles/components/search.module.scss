@@ -2,16 +2,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 75%;
-    min-height: 2.8rem;
-    border: 1px solid var(--light-gray);
-    border-radius: 1rem;
+    min-width: 75%;
+    max-width: 40rem;
+    min-height: 3rem;
+    border: 1px solid var(--gray);
+    border-radius: 2rem;
 
     & > .search {
-        width: 80%;
+        width: 95%;
+        margin: 0 0.5rem;
+        padding-left: 1rem;
     }
 
     & > i {
         font-size: 2rem;
+        margin-right: 1rem;
+        color: var(--gray);
+    }
+}
+
+@media (min-width: 600px) {
+    .searchContainer {
+        width: 80%;
+        min-height: 3.5rem;
+
+        & > .search {
+            font-size: 1.6rem;
+        }
+
+        & > i {
+            font-size: 2.5rem;
+        }
     }
 }

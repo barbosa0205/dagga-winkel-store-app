@@ -1,9 +1,10 @@
 import React from 'react'
+import { MainContainer } from '../components/MainContainer'
 
 export const CartPage = () => {
     return (
-        <div>
-            <h1>CartPage</h1>
-        </div>
+        <MainContainer>
+            <h1>HOLA</h1>
+        </MainContainer>
     )
 }

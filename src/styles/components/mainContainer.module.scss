@@ -1,0 +1,11 @@
+.mainContainer {
+    width: 100%;
+    min-height: 100vh;
+}
+
+@media (min-width: 1280px) {
+    .mainContainer {
+        width: 80%;
+        margin: 0 auto;
+    }
+}

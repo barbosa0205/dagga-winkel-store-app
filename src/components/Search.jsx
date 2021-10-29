@@ -10,7 +10,9 @@ export const Search = () => {
     return (
         <div className={`${searchContainer}`}>
             <input className={`${search}`} type="text" />
-            <Icon iconClass="ri-search-line" />
+            <Icon>
+                <i className="ri-search-line icon"></i>
+            </Icon>
         </div>
     )
 }
