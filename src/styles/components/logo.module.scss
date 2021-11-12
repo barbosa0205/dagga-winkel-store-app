@@ -1,11 +1,23 @@
+a:hover {
+    text-decoration: none;
+}
+
 .logoContainer {
     width: 100%;
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    & > .logo {
-        width: 15rem;
-        height: 5rem;
+}
+.logo {
+    font-size: 3.5rem;
+    font-weight: 400;
+    font-family: var(--logo-font);
+    color: var(--main);
+}
+
+@media (min-width: 600px) {
+    .logo {
+        font-size: 4.5rem;
     }
 }

@@ -31,8 +31,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
         width: 100%;
-        margin-top: 10rem;
     }
 }
 
@@ -47,11 +47,21 @@
         }
 
         & > .menuItemsContainer {
-            justify-content: center;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin: 0;
+            margin: 0 0.5rem;
             padding: 0;
+            min-height: 0;
+        }
+    }
+}
+
+@media (min-width: 720px) {
+    .asideContainer {
+        & > .menuItemsContainer {
+            justify-content: space-around;
         }
     }
 }

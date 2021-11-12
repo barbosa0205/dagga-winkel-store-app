@@ -8,11 +8,16 @@ import { Icon } from './Icon'
 
 export const Search = () => {
     return (
-        <div className={`${searchContainer}`}>
+        <form
+            className={`${searchContainer}`}
+            onSubmit={event => {
+                event.preventDefault()
+            }}
+        >
             <input className={`${search}`} type="text" />
             <Icon>
                 <i className="ri-search-line icon"></i>
             </Icon>
-        </div>
+        </form>
     )
 }

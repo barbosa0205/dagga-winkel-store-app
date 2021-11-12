@@ -3,7 +3,11 @@
     --light-gray: #f5f5f5;
     --gray: #d8d8d8;
     --dark: #201b1b;
-    --main: #03b64d;
+    --main: #00b68e;
+    --medium-main: #00b68f86;
+    --logo-font: 'Kristi', cursive;
+    --main-font: 'Zen Kaku Gothic New', sans-serif;
+    --title-font: 'Archivo Black', sans-serif;
 }
 
 * {
@@ -17,14 +21,15 @@ html {
 }
 
 body {
+    font-family: var(--main-font);
     font-size: 1.6rem;
     min-width: 280px;
     color: var(--dark);
 }
 
 input {
-    border: none;
     outline: none;
+    border: none;
 }
 
 a {

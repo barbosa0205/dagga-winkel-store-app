@@ -8,12 +8,17 @@ import { CartShop } from './CartShop'
 import { Aside } from './Aside'
 import { AsideItem } from './AsideItem'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../contexts/auth/useAuth'
+import { roles } from '../helpers/roles'
+import { ClientMenu } from './ClientMenu'
+import { Menu } from './Menu'
+import { GuestMenu } from './GuestMenu'
 
 export const Navbar = () => {
-    const [toggleMenu, setToggleMenu] = useState(false)
+    const { toggleMenu, setToggleMenu, isLogged, hasRole: role } = useAuth()
     return (
         <>
-            <div className={`${navContainer}`}>
+            <nav className={`${navContainer}`}>
                 <div className={`${navGroup}`}>
                     <Logo />
                     <Icon>
@@ -32,14 +37,15 @@ export const Navbar = () => {
                         </Icon>
                     </CartShop>
                 </div>
-                <Aside
-                    toggleMenu={toggleMenu}
-                    setToggleMenu={setToggleMenu}
-                    tabletHidden
-                >
-                    <AsideItem title="Item" />
-                </Aside>
-            </div>
+            </nav>
+            <Aside
+                toggleMenu={toggleMenu}
+                setToggleMenu={setToggleMenu}
+                tabletHidden
+            >
+                <Menu />
+                {isLogged() ? <ClientMenu /> : <GuestMenu />}
+            </Aside>
         </>
     )
 }

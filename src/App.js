@@ -1,10 +1,13 @@
 import React from 'react'
+import { AuthProvider } from './contexts/auth/AuthProvider'
 import { AppRouter } from './routers/AppRouter'
 
 export const StoreApp = () => {
     return (
         <div>
-            <AppRouter />
+            <AuthProvider>
+                <AppRouter />
+            </AuthProvider>
         </div>
     )
 }

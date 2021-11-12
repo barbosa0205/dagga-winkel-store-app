@@ -1,0 +1,21 @@
+.button {
+    min-width: 10rem;
+    min-height: 3rem;
+    border: none;
+    outline: none;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    background: var(--main);
+    color: var(--white);
+}
+
+.medium {
+    min-width: 15rem;
+    min-height: 4rem;
+}
+
+.large {
+    min-width: 23rem;
+    min-height: 4rem;
+}
