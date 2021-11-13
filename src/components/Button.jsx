@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 
 import { button, medium, large } from '../styles/components/button.module.scss'
 
-export const Button = ({ type, size }) => {
+export const Button = ({ type, size, ...rest }) => {
     return (
         <button
             className={`${button} ${
-                size && size === 'medium' ? medium : large
+                (size && size === 'medium' && medium) ||
+                (size === 'large' && large)
             }`}
             type={type}
+            {...rest}
         >
             Enviar
         </button>

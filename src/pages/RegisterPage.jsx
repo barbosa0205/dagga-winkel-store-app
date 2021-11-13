@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Logo } from '../components/Logo'
+import { Button } from '../components/Button'
 import { routes } from '../helpers/routes'
 import { useForm } from '../hooks/useForm'
 import {
@@ -62,6 +63,7 @@ export const RegisterPage = () => {
                                 onChange={handleInputChange}
                             />
                         </div>
+                        <Button type="submit" size="large" />
                     </form>
                     <p>
                         O en su defecto

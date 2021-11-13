@@ -25,6 +25,7 @@ body {
     font-size: 1.6rem;
     min-width: 280px;
     color: var(--dark);
+    background: var(--light-gray);
 }
 
 input {
@@ -39,18 +40,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-
-.hidden {
-    top: 0;
-    left: -75%;
-    transition: 0.4s ease;
-}
-
-.visible {
-    top: 0;
-    left: 0;
-    transition: 0.4s ease;
 }
 
 .icon {

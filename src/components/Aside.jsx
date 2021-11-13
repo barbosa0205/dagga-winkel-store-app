@@ -4,6 +4,8 @@ import {
     asideContainer,
     closeContainer,
     menuItemsContainer,
+    visible,
+    hidden,
 } from '../styles/components/aside.module.scss'
 import { Icon } from './Icon'
 
@@ -11,9 +13,7 @@ export const Aside = ({ children, toggleMenu, setToggleMenu }) => {
     return (
         <>
             <aside
-                className={`${asideContainer} ${
-                    toggleMenu ? 'visible' : 'hidden'
-                }`}
+                className={`${asideContainer} ${toggleMenu ? visible : hidden}`}
             >
                 <div className={`${closeContainer}`}>
                     <Icon>

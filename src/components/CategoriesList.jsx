@@ -25,7 +25,7 @@ export const CategoriesList = () => {
                 />
                 <Category
                     categoryIcon="ri-goblet-fill"
-                    categoryName="Ropa y Calzado"
+                    categoryName="vinos y licores"
                 />
                 <Category
                     categoryIcon="ri-t-shirt-line"
@@ -41,7 +41,7 @@ export const CategoriesList = () => {
                 />
                 <Category
                     categoryIcon="ri-goblet-fill"
-                    categoryName="Ropa y Calzado"
+                    categoryName="vinos y licores"
                 />
             </ul>
         </div>

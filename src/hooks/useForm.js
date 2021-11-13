@@ -1,27 +1,33 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../contexts/auth/useAuth'
 import { roles } from '../helpers/roles'
 
-export const useForm = initialValues => {
+export const useForm = (initialValues, validationsForm) => {
     const { setUser } = useAuth()
 
-    const [formValues, setFormValues] = useState({ initialValues })
+    const [formValues, setFormValues] = useState(initialValues)
+    const [errors, setErrors] = useState({})
+    const [loading, setLoading] = useState(false)
+    const [response, setResponse] = useState(null)
 
-    const handleInputChange = ({ target }) =>
-        setFormValues({ ...formValues, [target.name]: target.value })
+    const handleInputChange = ({ target }) => {
+        const { name, value } = target
+        setFormValues({ ...formValues, [name]: value })
+    }
 
     const handleForm = event => {
         event.preventDefault()
-        setUser({
-            ...formValues,
-            id: new Date(),
-            role: roles.client,
-        })
+    }
+
+    const handleBlur = event => {
+        handleInputChange(event)
+        setErrors(validationsForm(formValues))
     }
 
     return {
         formValues,
         handleForm,
         handleInputChange,
+        handleBlur,
     }
 }

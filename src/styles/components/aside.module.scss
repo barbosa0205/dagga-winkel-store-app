@@ -1,18 +1,15 @@
 .asideContainer {
     position: fixed;
-    width: 75%;
+    width: 100%;
     min-height: 100vh;
     background: var(--white);
     z-index: 9;
 
-    .hidden {
-        top: 0;
-        left: -75%;
-    }
-
-    .visible {
-        top: 0;
-        left: 0;
+    @media (min-width: 600px) {
+        position: static;
+        width: 100%;
+        min-height: 0;
+        z-index: 0;
     }
 
     & > .closeContainer {
@@ -22,46 +19,46 @@
         padding: 2rem;
         border-bottom: 1px solid var(--gray);
 
+        @media (min-width: 600px) {
+            display: none;
+        }
+
         & > i {
             font-size: 2.8rem;
         }
     }
 
     & > .menuItemsContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
         width: 100%;
-    }
-}
-
-@media (min-width: 600px) {
-    .asideContainer {
-        position: static;
-        width: 100%;
-        min-height: auto;
-
-        & > .closeContainer {
-            display: none;
-        }
-
-        & > .menuItemsContainer {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin: 0 0.5rem;
-            padding: 0;
-            min-height: 0;
-        }
-    }
-}
-
-@media (min-width: 720px) {
-    .asideContainer {
-        & > .menuItemsContainer {
+        display: grid;
+        grid-template-areas:
+            'client'
+            'menu'
+            'admin';
+        @media (min-width: 600px) {
+            grid-template-areas:
+                'menu client '
+                'admin admin';
             justify-content: space-around;
         }
     }
 }
+.visible {
+    top: 0;
+    left: 0;
+    transition: 0.4s ease-in-out;
+}
+
+.hidden {
+    top: 0;
+    left: -100%;
+    transition: 0.4s ease-in-out;
+}
+
+// @media (min-width: 720px) {
+//     .asideContainer {
+//         & > .menuItemsContainer {
+//             justify-content: space-around;
+//         }
+//     }
+// }

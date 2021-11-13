@@ -1,21 +1,25 @@
-import React, { useState } from 'react'
-
 import { navContainer, navGroup } from '../styles/components/navbar.module.scss'
 import { Logo } from './Logo'
 import { Icon } from './Icon'
 import { Search } from './Search'
 import { CartShop } from './CartShop'
 import { Aside } from './Aside'
-import { AsideItem } from './AsideItem'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/auth/useAuth'
-import { roles } from '../helpers/roles'
 import { ClientMenu } from './ClientMenu'
 import { Menu } from './Menu'
 import { GuestMenu } from './GuestMenu'
+import { roles } from '../helpers/roles'
+import { AdminMenu } from './AdminMenu'
 
 export const Navbar = () => {
-    const { toggleMenu, setToggleMenu, isLogged, hasRole: role } = useAuth()
+    const {
+        toggleMenu,
+        setToggleMenu,
+        user,
+        isLogged,
+        hasRole: role,
+    } = useAuth()
     return (
         <>
             <nav className={`${navContainer}`}>
@@ -43,8 +47,9 @@ export const Navbar = () => {
                 setToggleMenu={setToggleMenu}
                 tabletHidden
             >
-                <Menu />
                 {isLogged() ? <ClientMenu /> : <GuestMenu />}
+                <Menu />
+                {role(user?.role) && <AdminMenu />}
             </Aside>
         </>
     )

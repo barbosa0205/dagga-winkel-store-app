@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 75%;
-    max-width: 40rem;
+    width: 75%;
+    max-width: 30rem;
     min-height: 3rem;
     border: 1px solid var(--gray);
     border-radius: 2rem;
@@ -23,7 +23,7 @@
 
 @media (min-width: 600px) {
     .searchContainer {
-        width: 80%;
+        max-width: 50rem;
         min-height: 3.5rem;
 
         & > .search {

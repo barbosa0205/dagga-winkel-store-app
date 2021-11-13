@@ -1,17 +1,15 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Navbar } from '../components/Navbar'
 import { MainPage } from '../pages/MainPage'
 import { PrivateRoute } from './components/PrivateRoute'
 import { CartPage } from '../pages/CartPage'
 import { routes } from '../helpers/routes'
 import { roles } from '../helpers/roles'
+import { Layout } from '../components/Layout'
 export const MainRoutes = () => {
     return (
         <>
-            <Navbar />
-
-            <div>
+            <Layout>
                 <Switch>
                     <PrivateRoute
                         hasRole={roles.client}
@@ -21,7 +19,7 @@ export const MainRoutes = () => {
                     />
                     <Route exact path={routes.home} component={MainPage} />
                 </Switch>
-            </div>
+            </Layout>
         </>
     )
 }
