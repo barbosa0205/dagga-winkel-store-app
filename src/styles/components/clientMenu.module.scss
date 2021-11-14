@@ -1,6 +1,9 @@
 .menuContainer {
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     border-bottom: 1px solid var(--gray);
     grid-area: client;
@@ -8,16 +11,36 @@
 
 .clientContainer {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
     width: 100%;
     padding: 0.5rem 0 1rem 0;
 }
 
 .clientImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     & > img {
         border-radius: 50%;
     }
+
+    & > i {
+        font-size: 2.2rem;
+        margin-left: 1rem;
+        cursor: pointer;
+    }
+}
+
+.subMenu {
+    bottom: -30rem;
+    left: -10rem;
+    width: 20rem;
+}
+
+.itemsContainer {
+    width: 100%;
+    display: flex;
 }
 
 @media (min-width: 600px) {

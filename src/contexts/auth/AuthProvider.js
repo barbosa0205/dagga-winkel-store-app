@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
     const login = (userCredentials, fromLocation) => {
-        setUser({ id: 1, role: roles.admin })
+        setUser({ id: 1, role: roles.client })
         if (fromLocation) history.push(fromLocation)
     }
 
@@ -23,10 +23,12 @@ export const AuthProvider = ({ children }) => {
         return role && user?.role === role
     }
 
+    const toggle = () => setToggleMenu(!toggleMenu)
+
     const contextValue = {
         user,
         toggleMenu,
-        setToggleMenu,
+        toggle,
         isLogged,
         hasRole,
         login,

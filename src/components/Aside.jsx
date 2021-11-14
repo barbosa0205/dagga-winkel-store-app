@@ -9,7 +9,7 @@ import {
 } from '../styles/components/aside.module.scss'
 import { Icon } from './Icon'
 
-export const Aside = ({ children, toggleMenu, setToggleMenu }) => {
+export const Aside = ({ children, toggleMenu, toggle }) => {
     return (
         <>
             <aside
@@ -20,7 +20,7 @@ export const Aside = ({ children, toggleMenu, setToggleMenu }) => {
                         {' '}
                         <i
                             className={`ri-close-circle-line`}
-                            onClick={() => setToggleMenu(menu => !menu)}
+                            onClick={toggle}
                         ></i>
                     </Icon>
                 </div>

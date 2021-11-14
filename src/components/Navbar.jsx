@@ -13,13 +13,7 @@ import { roles } from '../helpers/roles'
 import { AdminMenu } from './AdminMenu'
 
 export const Navbar = () => {
-    const {
-        toggleMenu,
-        setToggleMenu,
-        user,
-        isLogged,
-        hasRole: role,
-    } = useAuth()
+    const { toggleMenu, toggle, user, isLogged } = useAuth()
     return (
         <>
             <nav className={`${navContainer}`}>
@@ -28,7 +22,7 @@ export const Navbar = () => {
                     <Icon>
                         <i
                             className={`ri-menu-fill icon tabletHidden`}
-                            onClick={() => setToggleMenu(!toggleMenu)}
+                            onClick={toggle}
                         ></i>
                     </Icon>
                     <Search />
@@ -42,14 +36,10 @@ export const Navbar = () => {
                     </CartShop>
                 </div>
             </nav>
-            <Aside
-                toggleMenu={toggleMenu}
-                setToggleMenu={setToggleMenu}
-                tabletHidden
-            >
+            <Aside toggleMenu={toggleMenu} toggle={toggle} tabletHidden>
                 {isLogged() ? <ClientMenu /> : <GuestMenu />}
                 <Menu />
-                {role(user?.role) && <AdminMenu />}
+                {user?.role === roles.admin && <AdminMenu />}
             </Aside>
         </>
     )

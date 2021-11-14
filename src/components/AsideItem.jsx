@@ -6,13 +6,9 @@ import PropTypes from 'prop-types'
 import { asideItem } from '../styles/components/asideItem.module.scss'
 
 export const AsideItem = ({ text, to: link }) => {
-    const { setToggleMenu } = useAuth()
+    const { toggle } = useAuth()
     return (
-        <Link
-            className={asideItem}
-            to={link}
-            onClick={() => setToggleMenu(menu => !menu)}
-        >
+        <Link className={asideItem} to={link} onClick={toggle}>
             {text}
         </Link>
     )

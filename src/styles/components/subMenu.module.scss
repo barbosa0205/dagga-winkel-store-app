@@ -1,0 +1,30 @@
+.subMenuContainer {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    height: 0;
+}
+
+.visible {
+    min-height: 30rem;
+    visibility: visible;
+    transition: 0.4s ease-in-out;
+}
+
+.hidden {
+    min-height: 0rem;
+    visibility: hidden;
+    transition: 0.4s ease-in-out;
+}
+
+@media (min-width: 600px) {
+    .subMenuContainer {
+        position: absolute;
+        z-index: 9;
+        background: var(--white);
+    }
+
+    .hidden {
+        display: none;
+    }
+}
