@@ -4,6 +4,8 @@
     align-items: center;
     width: 100%;
     padding: 1rem 0;
+    background: var(--white);
+    z-index: 99;
 }
 
 @media (min-width: 600px) {

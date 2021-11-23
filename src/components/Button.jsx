@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { button, medium, large } from '../styles/components/button.module.scss'
 
-export const Button = ({ type, size, ...rest }) => {
+export const Button = ({ type, size, text, ...rest }) => {
     return (
         <button
             className={`${button} ${
@@ -13,7 +13,7 @@ export const Button = ({ type, size, ...rest }) => {
             type={type}
             {...rest}
         >
-            Enviar
+            {text || 'Enviar'}
         </button>
     )
 }

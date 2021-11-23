@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { categories } from '../db/categories.api'
 import {
     categoriesContainer,
     categoriesList,
@@ -11,38 +11,13 @@ export const CategoriesList = () => {
         <div className={`${categoriesContainer}`}>
             <h2>Categories</h2>
             <ul className={`${categoriesList}`}>
-                <Category
-                    categoryIcon="ri-t-shirt-line"
-                    categoryName="Ropa y calzado"
-                />
-                <Category
-                    categoryIcon="ri-camera-fill"
-                    categoryName="Electronicos y electronica"
-                />
-                <Category
-                    categoryIcon="ri-restaurant-line"
-                    categoryName="Deportes y fitness"
-                />
-                <Category
-                    categoryIcon="ri-goblet-fill"
-                    categoryName="vinos y licores"
-                />
-                <Category
-                    categoryIcon="ri-t-shirt-line"
-                    categoryName="Ropa y calzado"
-                />
-                <Category
-                    categoryIcon="ri-camera-fill"
-                    categoryName="Electronicos y electronica"
-                />
-                <Category
-                    categoryIcon="ri-restaurant-line"
-                    categoryName="Deportes y fitness"
-                />
-                <Category
-                    categoryIcon="ri-goblet-fill"
-                    categoryName="vinos y licores"
-                />
+                {categories.map(({ id, category_icon, category_name }) => (
+                    <Category
+                        key={id}
+                        categoryIcon={category_icon}
+                        categoryName={category_name}
+                    />
+                ))}
             </ul>
         </div>
     )

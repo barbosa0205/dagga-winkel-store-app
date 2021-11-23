@@ -1,5 +1,5 @@
 import React from 'react'
-import { AsideItem } from './AsideItem'
+import { AsideItem } from './Aside/AsideItem'
 
 import { guestMenu } from '../styles/components/guestMenu.module.scss'
 import { Title } from './Title'

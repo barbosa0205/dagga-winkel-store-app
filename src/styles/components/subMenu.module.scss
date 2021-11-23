@@ -1,19 +1,21 @@
 .subMenuContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     min-width: 100%;
     height: 0;
+    box-shadow: 0 0 0.3rem 0 var(--gray);
 }
 
 .visible {
-    min-height: 30rem;
     visibility: visible;
+    min-height: 30rem;
     transition: 0.4s ease-in-out;
 }
 
 .hidden {
-    min-height: 0rem;
     visibility: hidden;
+    min-height: 0rem;
     transition: 0.4s ease-in-out;
 }
 

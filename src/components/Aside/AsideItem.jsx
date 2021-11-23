@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../contexts/auth/useAuth'
+import { useAuth } from '../../contexts/auth/useAuth'
 import PropTypes from 'prop-types'
 
-import { asideItem } from '../styles/components/asideItem.module.scss'
+import { asideItem } from '../../styles/components/asideItem.module.scss'
 
-export const AsideItem = ({ text, to: link }) => {
+export const AsideItem = ({ text, to: link, ...rest }) => {
     const { toggle } = useAuth()
     return (
-        <Link className={asideItem} to={link} onClick={toggle}>
+        <Link className={asideItem} to={link} onClick={toggle} {...rest}>
             {text}
         </Link>
     )

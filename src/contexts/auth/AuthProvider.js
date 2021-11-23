@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 
     const contextValue = {
         user,
+        setUser,
         toggleMenu,
         toggle,
         isLogged,

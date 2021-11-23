@@ -6,8 +6,8 @@ import {
     menuItemsContainer,
     visible,
     hidden,
-} from '../styles/components/aside.module.scss'
-import { Icon } from './Icon'
+} from '../../styles/components/aside.module.scss'
+import { Icon } from '../Icon'
 
 export const Aside = ({ children, toggleMenu, toggle }) => {
     return (
@@ -17,7 +17,6 @@ export const Aside = ({ children, toggleMenu, toggle }) => {
             >
                 <div className={`${closeContainer}`}>
                     <Icon>
-                        {' '}
                         <i
                             className={`ri-close-circle-line`}
                             onClick={toggle}

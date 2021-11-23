@@ -1,5 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
-import { Icon } from '../components/Icon'
+import { Link } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 import { routes } from '../helpers/routes'
 import { useForm } from '../hooks/useForm'
@@ -8,26 +7,20 @@ import {
     loginContainer,
     Title,
     link,
-    optionalLoginContainer,
+    inputContainer,
+    inputError,
 } from '../styles/pages/loginPage.module.scss'
 
 import { Button } from '../components/Button'
-import { validationsForm } from '../helpers/validationsForm'
-import { useAuth } from '../contexts/auth/useAuth'
+import { validationsLoginForm } from '../helpers/validationsLoginForm'
 
 export const LoginPage = () => {
-    const location = useLocation()
-
-    const userCredentials = {}
-
-    const { login } = useAuth()
-
-    const { handleForm, handleInputChange, handleBlur } = useForm(
+    const { handleForm, handleInputChange, handleBlur, errors } = useForm(
         {
             user: '',
             password: '',
         },
-        validationsForm
+        validationsLoginForm
     )
 
     return (
@@ -36,26 +29,35 @@ export const LoginPage = () => {
                 <div className={loginContainer}>
                     <h2 className={Title}>Inicia Sesión</h2>
                     <form onSubmit={handleForm}>
-                        <input
-                            type="text"
-                            name="user"
-                            placeholder="Usuario"
-                            onChange={handleInputChange}
-                            onBlur={handleBlur}
-                        />
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Contraseña"
-                            onChange={handleInputChange}
-                            onBlur={handleBlur}
-                        />
+                        <div className={inputContainer}>
+                            <input
+                                type="text"
+                                name="user"
+                                placeholder="Usuario"
+                                onChange={handleInputChange}
+                                onBlur={handleBlur}
+                            />
+                            {errors.user && (
+                                <p className={inputError}>{errors.user}</p>
+                            )}
+                        </div>
+                        <div className={inputContainer}>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Contraseña"
+                                onChange={handleInputChange}
+                                onBlur={handleBlur}
+                            />
+                            {errors.password && (
+                                <p className={inputError}>{errors.password}</p>
+                            )}
+                        </div>
+
                         <Button
                             type="submit"
                             size="large"
-                            onClick={() =>
-                                login(userCredentials, location.state?.from)
-                            }
+                            // onClick={() => login(useForm, location.state?.from)}
                         />
                     </form>
                     <p>

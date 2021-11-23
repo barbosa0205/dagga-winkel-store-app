@@ -1,6 +1,6 @@
 import React from 'react'
 import { menuContainer } from '../styles/components/menu.module.scss'
-import { AsideItem } from './AsideItem'
+import { AsideItem } from './Aside/AsideItem'
 export const Menu = () => {
     return (
         <div className={menuContainer}>

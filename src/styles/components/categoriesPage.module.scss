@@ -1,0 +1,13 @@
+h2 {
+    margin-top: 3rem;
+}
+
+.categoriesContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 80%;
+    max-width: 54rem;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 3rem;
+}

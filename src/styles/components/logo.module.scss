@@ -17,6 +17,11 @@ a:hover {
 }
 
 @media (min-width: 600px) {
+    .logoContainer {
+        width: 20rem;
+        padding: 0;
+        margin: 0;
+    }
     .logo {
         font-size: 4.5rem;
     }

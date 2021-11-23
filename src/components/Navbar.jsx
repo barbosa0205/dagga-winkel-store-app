@@ -19,12 +19,11 @@ export const Navbar = () => {
             <nav className={`${navContainer}`}>
                 <div className={`${navGroup}`}>
                     <Logo />
-                    <Icon>
-                        <i
-                            className={`ri-menu-fill icon tabletHidden`}
-                            onClick={toggle}
-                        ></i>
-                    </Icon>
+                    <Icon
+                        className={`ri-menu-fill icon tabletHidden`}
+                        onClick={toggle}
+                    />
+
                     <Search />
                     <CartShop>
                         <Icon>

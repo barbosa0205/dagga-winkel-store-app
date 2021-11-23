@@ -15,9 +15,7 @@ export const Search = () => {
             }}
         >
             <input className={`${search}`} type="text" />
-            <Icon>
-                <i className="ri-search-line icon"></i>
-            </Icon>
+            <Icon className="ri-search-line icon"></Icon>
         </form>
     )
 }

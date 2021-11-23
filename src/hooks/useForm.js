@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/auth/useAuth'
-import { roles } from '../helpers/roles'
-
+import { useLocation } from 'react-router'
 export const useForm = (initialValues, validationsForm) => {
-    const { setUser } = useAuth()
+    const location = useLocation()
+    const { login } = useAuth()
 
     const [formValues, setFormValues] = useState(initialValues)
     const [errors, setErrors] = useState({})
@@ -17,6 +17,18 @@ export const useForm = (initialValues, validationsForm) => {
 
     const handleForm = event => {
         event.preventDefault()
+        let values = Object.values(formValues)
+        const valueLength = values.length
+        let result
+        result = values.filter(value => !!value)
+        console.log(result)
+        if (result.length !== valueLength) return
+
+        if (Object.keys(errors).length > 0) {
+            return
+        }
+
+        login(formValues, location.state?.from)
     }
 
     const handleBlur = event => {
@@ -29,5 +41,6 @@ export const useForm = (initialValues, validationsForm) => {
         handleForm,
         handleInputChange,
         handleBlur,
+        errors,
     }
 }

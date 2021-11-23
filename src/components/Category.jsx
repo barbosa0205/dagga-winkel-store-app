@@ -5,11 +5,11 @@ import {
     category,
 } from '../styles/components/category.module.scss'
 
-export const Category = props => {
+export const Category = ({ categoryIcon, categoryName }) => {
     return (
         <div className={`${categoryContainer}`}>
-            <i className={`${props.categoryIcon} ${category}`}></i>
-            <p>{props.categoryName}</p>
+            <i className={`${categoryIcon} ${category}`}></i>
+            <p>{categoryName}</p>
         </div>
     )
 }
