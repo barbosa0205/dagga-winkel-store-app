@@ -15,20 +15,23 @@ export const useForm = (initialValues, validationsForm) => {
         setFormValues({ ...formValues, [name]: value })
     }
 
-    const handleForm = event => {
+    const preventSubmit = event => {
         event.preventDefault()
+    }
+
+    const handleForm = () => {
         let values = Object.values(formValues)
         const valueLength = values.length
         let result
         result = values.filter(value => !!value)
-        console.log(result)
-        if (result.length !== valueLength) return
+
+        if (result.length !== valueLength) return false
 
         if (Object.keys(errors).length > 0) {
-            return
+            return false
+        } else {
+            return true
         }
-
-        login(formValues, location.state?.from)
     }
 
     const handleBlur = event => {
@@ -38,9 +41,12 @@ export const useForm = (initialValues, validationsForm) => {
 
     return {
         formValues,
+        preventSubmit,
         handleForm,
         handleInputChange,
         handleBlur,
         errors,
+        loading,
+        setLoading,
     }
 }

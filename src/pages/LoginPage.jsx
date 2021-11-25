@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 import { routes } from '../helpers/routes'
 import { useForm } from '../hooks/useForm'
@@ -13,9 +13,26 @@ import {
 
 import { Button } from '../components/Button'
 import { validationsLoginForm } from '../helpers/validationsLoginForm'
+import { useAuth } from '../contexts/auth/useAuth'
+import { useState } from 'react'
+import { Alert } from '../components/Alert'
 
 export const LoginPage = () => {
-    const { handleForm, handleInputChange, handleBlur, errors } = useForm(
+    const location = useLocation()
+    const { login } = useAuth()
+    const [formAlert, setFormAlert] = useState(false)
+    let user = true
+
+    const {
+        formValues,
+        preventSubmit,
+        handleForm,
+        handleInputChange,
+        handleBlur,
+        loading,
+        setLoading,
+        errors,
+    } = useForm(
         {
             user: '',
             password: '',
@@ -23,12 +40,22 @@ export const LoginPage = () => {
         validationsLoginForm
     )
 
+    const setLogin = () => {
+        const allCorrect = handleForm()
+        if (allCorrect) {
+            setLoading(true)
+            user = login(formValues, location.state?.from)
+            !user && setFormAlert(true)
+            setLoading(false)
+        }
+    }
+
     return (
         <>
             <div className={`${mainContainer}`}>
                 <div className={loginContainer}>
                     <h2 className={Title}>Inicia Sesión</h2>
-                    <form onSubmit={handleForm}>
+                    <form onSubmit={preventSubmit}>
                         <div className={inputContainer}>
                             <input
                                 type="text"
@@ -57,8 +84,12 @@ export const LoginPage = () => {
                         <Button
                             type="submit"
                             size="large"
-                            // onClick={() => login(useForm, location.state?.from)}
+                            onClick={() => {
+                                setLogin()
+                            }}
                         />
+                        {loading && <p>cargando...</p>}
+                        {formAlert && <Alert text="Este usuario no existe" />}
                     </form>
                     <p>
                         No tienes una cuenta?

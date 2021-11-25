@@ -49,6 +49,11 @@
         padding: 0.5rem;
         margin: 1rem;
     }
+
+    & .inputError {
+        text-align: center;
+        color: var(--danger);
+    }
 }
 
 .nameContainer,
@@ -68,6 +73,47 @@ p {
     }
 }
 
+.userRegisterAlert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 25rem;
+    max-width: 45rem;
+    height: 20rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: var(--white);
+    z-index: 999;
+
+    & > .closeContainer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        & > i {
+            font-size: 2.3rem;
+            cursor: pointer;
+        }
+    }
+
+    & > i {
+        font-size: 10rem;
+        color: var(--main);
+    }
+
+    & > p {
+        font-size: 2rem;
+    }
+
+    & > a {
+        color: var(--main);
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 @media (min-width: 600px) {
     .registerContainer {
         .Title {
@@ -83,11 +129,6 @@ p {
     .inputContainer {
         & input {
             font-size: 2.5rem;
-        }
-
-        .inputError {
-            text-align: center;
-            color: var(--danger);
         }
     }
 }
