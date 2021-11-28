@@ -1,0 +1,15 @@
+.avatarsContainer {
+    width: 100%;
+    max-height: 18rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 5rem);
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    & > img {
+        width: 5rem;
+        cursor: pointer;
+    }
+}

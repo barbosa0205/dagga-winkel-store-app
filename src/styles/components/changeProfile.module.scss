@@ -1,0 +1,27 @@
+.changeProfileContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 2rem;
+    overflow-y: hidden;
+    .optionContainer {
+        width: 100%;
+        max-width: 34rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        & > p {
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        & > .changeName {
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--main);
+        }
+    }
+}

@@ -22,6 +22,10 @@
     align-items: center;
     width: 100%;
 
+    & > img {
+        width: 8rem;
+    }
+
     & > i {
         font-size: 2.2rem;
         margin-left: 1rem;
@@ -29,11 +33,6 @@
     }
 }
 
-.subMenu {
-    bottom: -30rem;
-    left: -10rem;
-    width: 20rem;
-}
 .settingsContainer {
     display: flex;
     justify-content: flex-end;
@@ -60,6 +59,11 @@
 }
 
 @media (min-width: 600px) {
+    .subMenu {
+        bottom: -20.3rem;
+        left: -10rem;
+        width: 20rem;
+    }
     .menuContainer {
         border-bottom: none;
     }
@@ -69,7 +73,20 @@
 
     .clientImg {
         & > img {
-            width: 6rem;
+            width: 4rem;
+        }
+    }
+
+    .subMenu {
+        .settingsContainer {
+            border-bottom: 1px solid var(--light-gray);
+        }
+        & > .itemsContainer {
+            & > a {
+                margin: 0.3rem 0;
+                width: 100%;
+                border-bottom: 1px solid var(--light-gray);
+            }
         }
     }
 }

@@ -3,9 +3,8 @@
     width: 100%;
     min-height: 100vh;
     background: var(--white);
-    box-shadow: 0 1px 0.2rem 0 var(--light-gray);
-    z-index: 9;
 
+    z-index: 9;
     @media (min-width: 600px) {
         position: static;
         width: 100%;

@@ -1,8 +1,52 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     min-height: 70vh;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
+
+    & > .editProfileContainer {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        & > p {
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+    }
+
+    & > .userContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 15rem;
+        border-bottom: 1px solid var(--light-gray);
+
+        @media (min-width: 600px) {
+            flex-direction: row;
+        }
+
+        & > img {
+            width: 10rem;
+        }
+
+        & > h2 {
+            margin-left: 2rem;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--dark);
+        }
+
+        @media (min-width: 600px) {
+            & > img {
+                width: 12rem;
+            }
+
+            & > h2 {
+                font-size: 4.2rem;
+            }
+        }
+    }
 }

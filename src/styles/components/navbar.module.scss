@@ -6,6 +6,7 @@
     width: 100%;
     min-height: 10rem;
     padding: 0 2rem;
+    border-bottom: 1px solid var(--light-gray);
 
     & > .navGroup {
         display: flex;

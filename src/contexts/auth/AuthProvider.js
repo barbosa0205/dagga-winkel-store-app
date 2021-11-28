@@ -2,6 +2,9 @@ import React, { createContext, useState } from 'react'
 import { useHistory } from 'react-router'
 import { roles } from '../../helpers/roles'
 import { nanoid } from 'nanoid'
+import { createAvatar } from '@dicebear/avatars'
+import * as style from '@dicebear/avatars-bottts-sprites'
+import md5 from 'md5'
 //Creamos nuestro contexto
 export const AuthContext = createContext()
 
@@ -18,23 +21,7 @@ export const AuthProvider = ({ children }) => {
     const register = newUser => {
         if (bd) {
             let clients = []
-            if (clients.length) {
-                setBd([
-                    ...bd,
-                    {
-                        id: nanoid(),
-                        roles: roles.client,
-                        user: newUser.user,
-                        name: newUser.name,
-                        lastname: newUser.lastname,
-                        email: newUser.email,
-                        password: newUser.password,
-                    },
-                ])
-                return {
-                    userExist: 'not exist',
-                }
-            }
+
             //Asignamos el email y usuario de cada cliente al arreglo clients
             clients = bd.map(({ email, user }) => {
                 return {
@@ -64,11 +51,15 @@ export const AuthProvider = ({ children }) => {
                     {
                         id: nanoid(),
                         roles: roles.client,
-                        user: newUser.user,
-                        name: newUser.name,
-                        lastname: newUser.lastname,
-                        email: newUser.email,
-                        password: newUser.password,
+                        user: newUser.user.trim(),
+                        name: newUser.name.trim(),
+                        lastname: newUser.lastname.trim(),
+                        email: newUser.email.trim(),
+                        password: md5(newUser.password).trim(),
+                        img: createAvatar(style, {
+                            dataUri: true,
+                            size: 120,
+                        }),
                     },
                 ])
                 return {
@@ -78,15 +69,14 @@ export const AuthProvider = ({ children }) => {
         }
     }
     const login = (userCredentials, fromLocation) => {
-        console.log(userCredentials, bd)
-
-        const correctUser = bd.some(
+        const correctUser = bd.filter(
             ({ user, password }) =>
                 userCredentials.user === user &&
-                userCredentials.password === password
+                md5(userCredentials.password) === password
         )
-        if (correctUser) {
-            setUser({ id: 1, role: roles.client, ...userCredentials })
+        if (correctUser.length) {
+            console.log(correctUser)
+            setUser({ role: roles.client, ...correctUser[0] })
 
             if (fromLocation) {
                 history.push(fromLocation)

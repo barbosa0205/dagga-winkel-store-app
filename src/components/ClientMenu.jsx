@@ -19,7 +19,7 @@ import { UserImg } from './UserImg'
 
 export const ClientMenu = () => {
     const { menu, toggleMenu } = useMenu()
-    const { logout, toggle } = useAuth()
+    const { user, logout, toggle } = useAuth()
 
     const history = useHistory()
 
@@ -28,10 +28,7 @@ export const ClientMenu = () => {
             <div className={menuContainer}>
                 <div className={clientContainer}>
                     <div className={clientImg}>
-                        <UserImg
-                            src="https://via.placeholder.com/80"
-                            alt="client"
-                        />
+                        <UserImg src={user.img} alt="client" />
                         <i
                             className="ri-arrow-down-s-line"
                             onClick={toggleMenu}
