@@ -1,23 +1,23 @@
 import { nanoid } from 'nanoid'
-export const categories = [
-    {
-        id: nanoid(),
+export const categories = {
+    ropa_y_calzado: {
+        category_id: nanoid(),
         category_icon: 'ri-t-shirt-line',
-        category_name: 'Ropa y calzado',
+        category_name: 'Ropa y Calzado',
     },
-    {
-        id: nanoid(),
+    electronicos_y_electronica: {
+        category_id: nanoid(),
         category_icon: 'ri-camera-fill',
-        category_name: 'Electronicos y electronica',
+        category_name: 'Electrodomesticos y Electronica',
     },
-    {
-        id: nanoid(),
+    deportes_y_fitness: {
+        category_id: nanoid(),
         category_icon: 'ri-restaurant-line',
-        category_name: 'Deportes y fitness',
+        category_name: 'Deportes y Fitness',
     },
-    {
-        id: nanoid(),
+    vinos_y_licores: {
+        category_id: nanoid(),
         category_icon: 'ri-goblet-fill',
-        category_name: 'vinos y licores',
+        category_name: 'Vinos y Licores',
     },
-]
+}

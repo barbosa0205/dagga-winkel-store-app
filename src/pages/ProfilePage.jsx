@@ -31,7 +31,7 @@ export const ProfilePage = () => {
             {menu && (
                 <Modal>
                     <FloatingContainer toggleMenu={toggleMenu}>
-                        <ChangeProfile menu={menu} />
+                        <ChangeProfile menu={menu} toggleMenu={toggleMenu} />
                     </FloatingContainer>
                 </Modal>
             )}

@@ -5,6 +5,17 @@ import { nanoid } from 'nanoid'
 import { createAvatar } from '@dicebear/avatars'
 import * as style from '@dicebear/avatars-bottts-sprites'
 import md5 from 'md5'
+import profileImg from '../../assets/profile.jpg'
+
+//FIREBASE
+import { db, auth } from '../../firebase/credentials'
+
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+} from 'firebase/auth'
+import { collection, addDoc, getDoc, get } from 'firebase/firestore'
+
 //Creamos nuestro contexto
 export const AuthContext = createContext()
 
@@ -17,75 +28,72 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [bd, setBd] = useState([])
 
-    //la funcion register compara el email y usuario de cada cliente y devuelve un objeto con la propiedad userExist 'exist' | 'not exist'
-    const register = newUser => {
-        if (bd) {
-            let clients = []
+    const authUser = newUser => {
+        createUserWithEmailAndPassword(
+            auth,
+            newUser.email,
+            md5(newUser.password)
+        )
+            .then(userCredential => {
+                console.log('sign up')
+            })
+            .catch(error => {
+                const errorCode = error.code
+                const errorMessage = error.message
 
-            //Asignamos el email y usuario de cada cliente al arreglo clients
-            clients = bd.map(({ email, user }) => {
                 return {
-                    ...bd,
-                    user,
-                    email,
+                    errorCode,
+                    errorMessage,
                 }
             })
-            //asignamos a la variable userAlreadyExist un valor booleano, si el email y usuario es igual a los datos que ingresa el usuario este regresa {userExist: 'exist} de lo contrario regresa {userExist: 'no exist} el cual se usa para condicionar dos alertas  en la pagina de registro
+    }
 
-            const userAlredyExist = clients.some(({ email, user }) => {
-                console.log(email, user)
-                return email === newUser.email || user === newUser.user
-                    ? true
-                    : false
+    const createNewUser = async newUser => {
+        try {
+            const docUser = await addDoc(collection(db, 'users'), {
+                roles: roles.client,
+                user: newUser.user.trim(),
+                name: newUser.name.trim(),
+                lastname: newUser.lastname.trim(),
+                email: newUser.email.trim(),
+                password: md5(newUser.password).trim(),
+                img: createAvatar(style, {
+                    dataUri: true,
+                    size: 120,
+                    background: '#ececec',
+                }),
             })
-            console.log(userAlredyExist)
-
-            if (userAlredyExist) {
-                console.log('ya existe este usuario')
-                return {
-                    userExist: 'exist',
-                }
-            } else {
-                setBd([
-                    ...bd,
-                    {
-                        id: nanoid(),
-                        roles: roles.client,
-                        user: newUser.user.trim(),
-                        name: newUser.name.trim(),
-                        lastname: newUser.lastname.trim(),
-                        email: newUser.email.trim(),
-                        password: md5(newUser.password).trim(),
-                        img: createAvatar(style, {
-                            dataUri: true,
-                            size: 120,
-                        }),
-                    },
-                ])
-                return {
-                    userExist: 'not exist',
-                }
-            }
+            console.log('Document written with ID: ', docUser.id)
+        } catch (error) {
+            console.error('Error adding document: ', error)
         }
     }
-    const login = (userCredentials, fromLocation) => {
-        const correctUser = bd.filter(
-            ({ user, password }) =>
-                userCredentials.user === user &&
-                md5(userCredentials.password) === password
-        )
-        if (correctUser.length) {
-            console.log(correctUser)
-            setUser({ role: roles.client, ...correctUser[0] })
 
-            if (fromLocation) {
-                history.push(fromLocation)
-            } else {
-                history.push('/')
-            }
-        } else {
-            return false
-        }
+    //la funcion register compara el email y usuario de cada cliente y devuelve un objeto con la propiedad userExist 'exist' | 'not exist'
+    const register = async newUser => {
+        const userExist = authUser(newUser)
+        console.log(userExist)
+    }
+    const login = (userCredentials, fromLocation) => {
+        signInWithEmailAndPassword(
+            auth,
+            userCredentials.email,
+            md5(userCredentials.password)
+        ).then(userCredential => {
+            console.log('sign in')
+        })
+        // if (correctUser.length) {
+        //     console.log(correctUser)
+        //     setUser({ role: roles.client, ...correctUser[0] })
+
+        //     if (fromLocation) {
+        //         history.push(fromLocation)
+        //     } else {
+        //         history.push('/')
+        //     }
+        // } else {
+        //     return false
+        // }
     }
 
     const logout = () => setUser(null)

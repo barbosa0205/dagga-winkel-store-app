@@ -34,7 +34,7 @@ export const LoginPage = () => {
         errors,
     } = useForm(
         {
-            user: '',
+            email: '',
             password: '',
         },
         validationsLoginForm
@@ -58,14 +58,14 @@ export const LoginPage = () => {
                     <form onSubmit={preventSubmit}>
                         <div className={inputContainer}>
                             <input
-                                type="text"
-                                name="user"
-                                placeholder="Usuario"
+                                type="email"
+                                name="email"
+                                placeholder="Correo"
                                 onChange={handleInputChange}
                                 onBlur={handleBlur}
                             />
-                            {errors.user && (
-                                <p className={inputError}>{errors.user}</p>
+                            {errors.email && (
+                                <p className={inputError}>{errors.email}</p>
                             )}
                         </div>
                         <div className={inputContainer}>

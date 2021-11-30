@@ -6,15 +6,16 @@ import {
     infoProductContainer,
 } from '../styles/components/product.module.scss'
 
-export const Product = () => {
+export const Product = ({ productData }) => {
+    const { product_name, price } = productData
     return (
         <div className={`${productContainer}`}>
             <div className={`${product}`}>
                 {/* <img src="https://picsum.photos/500" alt="product" /> */}
             </div>
             <div className={`${infoProductContainer}`}>
-                <h3>Producto</h3>
-                <p>$123.99</p>
+                <h3>{product_name}</h3>
+                <p>{`$${price}`}</p>
             </div>
         </div>
     )

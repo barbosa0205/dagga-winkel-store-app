@@ -11,5 +11,9 @@
     & > img {
         width: 5rem;
         cursor: pointer;
+        border-radius: 50%;
+    }
+    & > .isSelected {
+        border: 3px solid var(--main);
     }
 }

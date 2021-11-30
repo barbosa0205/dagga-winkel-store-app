@@ -7,6 +7,7 @@ export const generateAvatars = qty => {
         const avatar = createAvatar(style, {
             size: 120,
             dataUri: true,
+            background: '#ececec',
         })
         avatars.push(avatar)
     }

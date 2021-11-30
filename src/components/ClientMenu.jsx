@@ -11,11 +11,11 @@ import {
 } from '../styles/components/clientMenu.module.scss'
 import { AsideItem } from './Aside/AsideItem'
 import { Icon } from './Icon'
-import { SubMenu } from './SubMenu'
 import { useAuth } from '../contexts/auth/useAuth'
 import { useHistory } from 'react-router'
 import { routes } from '../helpers/routes'
 import { UserImg } from './UserImg'
+import { SubMenu } from './menus/SubMenu'
 
 export const ClientMenu = () => {
     const { menu, toggleMenu } = useMenu()
@@ -46,8 +46,20 @@ export const ClientMenu = () => {
                         />
                     </div>
                     <div className={itemsContainer}>
-                        <AsideItem to={routes.profile} text="Mi perfil" />
-                        <AsideItem to="/" text="Favoritos" />
+                        <AsideItem
+                            to={routes.profile}
+                            text="Mi perfil"
+                            onClick={() => {
+                                toggle()
+                            }}
+                        />
+                        <AsideItem
+                            to="/"
+                            text="Favoritos"
+                            onClick={() => {
+                                toggle()
+                            }}
+                        />
                         <AsideItem
                             to={routes.home}
                             text="Cerrar sesión"

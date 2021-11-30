@@ -16,12 +16,13 @@ export const ProductsPreview = props => {
                 <Link to="/oferts">Ver todos</Link>
             </div>
             <div className={`${productsContainer}`}>
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
+                {props.products &&
+                    props.products.map(product => (
+                        <Product
+                            key={product.product_id}
+                            productData={product}
+                        />
+                    ))}
             </div>
         </div>
     )

@@ -3,8 +3,9 @@
     width: 100%;
     min-height: 100vh;
     background: var(--white);
-
+    border-bottom: 1px solid var(--light-gray);
     z-index: 9;
+
     @media (min-width: 600px) {
         position: static;
         width: 100%;
@@ -38,8 +39,8 @@
             'admin';
         @media (min-width: 600px) {
             grid-template-areas:
-                'menu client '
-                'admin admin';
+                'menu  client client '
+                'admin admin admin';
             justify-content: space-around;
         }
     }

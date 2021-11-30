@@ -24,4 +24,20 @@
             border-bottom: 2px solid var(--main);
         }
     }
+
+    .buttonContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 1rem;
+    }
+
+    & > form {
+        width: 100%;
+
+        & > h3 {
+            text-align: center;
+            margin-top: 1rem;
+        }
+    }
 }
