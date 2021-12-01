@@ -1,11 +1,9 @@
 import React, { createContext, useState } from 'react'
 import { useHistory } from 'react-router'
 import { roles } from '../../helpers/roles'
-import { nanoid } from 'nanoid'
 import { createAvatar } from '@dicebear/avatars'
 import * as style from '@dicebear/avatars-bottts-sprites'
 import md5 from 'md5'
-import profileImg from '../../assets/profile.jpg'
 
 //FIREBASE
 import { db, auth } from '../../firebase/credentials'
@@ -17,7 +15,6 @@ import {
 import {
     collection,
     addDoc,
-    getDoc,
     where,
     query,
     onSnapshot,
@@ -32,12 +29,11 @@ export const AuthProvider = ({ children }) => {
 
     //states
     const [toggleMenu, setToggleMenu] = useState(false)
-    const [userId, setUserId] = useState(null)
     const [user, setUser] = useState(null)
 
     const userAlreadyRegister = async newUser => {
         try {
-            const userCredential = await createUserWithEmailAndPassword(
+            createUserWithEmailAndPassword(
                 auth,
                 newUser.email,
                 md5(newUser.password)
@@ -78,7 +74,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const getUserData = async email => {
+    const getUserData = async (email, fromLocation) => {
         try {
             console.log(email)
             const colRef = collection(db, 'users')
@@ -86,7 +82,13 @@ export const AuthProvider = ({ children }) => {
             onSnapshot(q, snapshot => {
                 let data = snapshot.docs.find(doc => doc)
                 setUser(data.data())
-                return true
+                if (data) {
+                    if (fromLocation) {
+                        history.push(fromLocation)
+                    } else {
+                        history.push('/')
+                    }
+                }
             })
         } catch (error) {
             console.log(error)
@@ -109,15 +111,7 @@ export const AuthProvider = ({ children }) => {
                 email,
                 md5(password)
             )
-            const data = await getUserData(isLogin.user.email)
-
-            if (data) {
-                if (fromLocation) {
-                    history.push(fromLocation)
-                } else {
-                    history.push('/')
-                }
-            }
+            getUserData(isLogin.user.email, fromLocation)
             return true
         } catch (error) {
             const errorCode = error.code
