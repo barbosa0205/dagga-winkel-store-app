@@ -14,7 +14,14 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { collection, addDoc, getDoc, get } from 'firebase/firestore'
+import {
+    collection,
+    addDoc,
+    getDoc,
+    where,
+    query,
+    onSnapshot,
+} from 'firebase/firestore'
 
 //Creamos nuestro contexto
 export const AuthContext = createContext()
@@ -25,34 +32,36 @@ export const AuthProvider = ({ children }) => {
 
     //states
     const [toggleMenu, setToggleMenu] = useState(false)
+    const [userId, setUserId] = useState(null)
     const [user, setUser] = useState(null)
-    const [bd, setBd] = useState([])
 
-    const authUser = newUser => {
-        createUserWithEmailAndPassword(
-            auth,
-            newUser.email,
-            md5(newUser.password)
-        )
-            .then(userCredential => {
-                console.log('sign up')
-            })
-            .catch(error => {
-                const errorCode = error.code
-                const errorMessage = error.message
+    const userAlreadyRegister = async newUser => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                newUser.email,
+                md5(newUser.password)
+            )
 
-                return {
-                    errorCode,
-                    errorMessage,
-                }
-            })
+            return {
+                isRegistrable: true,
+            }
+        } catch (error) {
+            const errorCode = error.code
+            const errorMessage = error.message
+            console.error(
+                `CODIGO DE ERROR: ${errorCode}, MENSAJE DE ERROR: ${errorMessage}`
+            )
+            return {
+                error: error.code,
+            }
+        }
     }
 
     const createNewUser = async newUser => {
         try {
             const docUser = await addDoc(collection(db, 'users'), {
-                roles: roles.client,
-                user: newUser.user.trim(),
+                role: roles.client,
                 name: newUser.name.trim(),
                 lastname: newUser.lastname.trim(),
                 email: newUser.email.trim(),
@@ -69,31 +78,57 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    //la funcion register compara el email y usuario de cada cliente y devuelve un objeto con la propiedad userExist 'exist' | 'not exist'
-    const register = async newUser => {
-        const userExist = authUser(newUser)
-        console.log(userExist)
+    const getUserData = async email => {
+        try {
+            console.log(email)
+            const colRef = collection(db, 'users')
+            const q = query(colRef, where('email', '==', email))
+            onSnapshot(q, snapshot => {
+                let data = snapshot.docs.find(doc => doc)
+                setUser(data.data())
+                return true
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
-    const login = (userCredentials, fromLocation) => {
-        signInWithEmailAndPassword(
-            auth,
-            userCredentials.email,
-            md5(userCredentials.password)
-        ).then(userCredential => {
-            console.log('sign in')
-        })
-        // if (correctUser.length) {
-        //     console.log(correctUser)
-        //     setUser({ role: roles.client, ...correctUser[0] })
 
-        //     if (fromLocation) {
-        //         history.push(fromLocation)
-        //     } else {
-        //         history.push('/')
-        //     }
-        // } else {
-        //     return false
-        // }
+    const register = async newUser => {
+        const clientExist = await userAlreadyRegister(newUser)
+        console.log(clientExist)
+        if (clientExist.isRegistrable) {
+            createNewUser(newUser)
+        }
+        return clientExist
+    }
+    const login = async (userCredentials, fromLocation) => {
+        try {
+            const { email, password } = userCredentials
+            const isLogin = await signInWithEmailAndPassword(
+                auth,
+                email,
+                md5(password)
+            )
+            const data = await getUserData(isLogin.user.email)
+
+            if (data) {
+                if (fromLocation) {
+                    history.push(fromLocation)
+                } else {
+                    history.push('/')
+                }
+            }
+            return true
+        } catch (error) {
+            const errorCode = error.code
+            const errorMessage = error.message
+            console.error(
+                `CODIGO DE ERROR: ${errorCode}, MENSAJE DE ERROR: ${errorMessage}`
+            )
+            return {
+                error: error.code,
+            }
+        }
     }
 
     const logout = () => setUser(null)
@@ -119,8 +154,6 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         register,
-        bd,
-        setBd,
     } //deberia ser memorizado, lo haremos despues cuando veamos la necesidad
 
     return (

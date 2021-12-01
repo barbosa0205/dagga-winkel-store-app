@@ -24,7 +24,7 @@ import { Icon } from '../components/Icon'
 import { useMenu } from '../hooks/useMenu'
 import { Alert } from '../components/Alert'
 export const RegisterPage = () => {
-    const [newUser, setNewUser] = useState({})
+    const [newUser, setNewUser] = useState(null)
     const { register } = useAuth()
     const {
         formValues,
@@ -36,7 +36,6 @@ export const RegisterPage = () => {
         setLoading,
     } = useForm(
         {
-            user: '',
             name: '',
             lastname: '',
             email: '',
@@ -45,11 +44,11 @@ export const RegisterPage = () => {
         },
         validationsRegisterForm
     )
-    const setRegister = () => {
+    const setRegister = async () => {
         const allCorrect = handleForm()
         if (allCorrect) {
             setLoading(true)
-            setNewUser(register(formValues))
+            setNewUser(await register(formValues))
 
             setLoading(false)
         }
@@ -64,18 +63,6 @@ export const RegisterPage = () => {
                     <h2 className={Title}>Registrate</h2>
                     <form onSubmit={preventSubmit}>
                         <div className={nameContainer}>
-                            <div className={inputContainer}>
-                                <input
-                                    type="text"
-                                    name="user"
-                                    placeholder="Usuario"
-                                    onChange={handleInputChange}
-                                    onBlur={handleBlur}
-                                />
-                                {errors.user && (
-                                    <p className={inputError}>{errors.user}</p>
-                                )}
-                            </div>
                             <div className={inputContainer}>
                                 <input
                                     type="text"
@@ -147,7 +134,7 @@ export const RegisterPage = () => {
                                 )}
                             </div>
                         </div>
-                        {newUser.userExist === 'exist' && (
+                        {newUser?.error && (
                             <Alert text="Este usuario ya ha sido registrado" />
                         )}
                         <Button
@@ -163,7 +150,7 @@ export const RegisterPage = () => {
                 </div>
                 <Logo />
             </div>
-            {newUser?.userExist === 'not exist' && (
+            {newUser?.isRegistrable && (
                 <>
                     {!menu && (
                         <Modal>

@@ -1,12 +1,6 @@
 export const validationsRegisterForm = form => {
     let errors = {}
 
-    if (form.user.trim().length < 4 || form.user.trim().length > 16) {
-        errors.user = "El campo 'usuario' debe contener entre 4 y 16 caracteres"
-    }
-    if (!form.user.trim()) {
-        errors.user = "El campo 'usuario' es requerido"
-    }
     if (form.name.trim().length < 3 || form.name.trim().length > 35) {
         errors.name = "El campo 'nombre' debe contener entre 3 y 35 caracteres"
     }

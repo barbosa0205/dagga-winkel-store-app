@@ -16,4 +16,3 @@ export const firebaseApp = {
 export const app = initializeApp(firebaseApp)
 export const auth = getAuth()
 export const db = getFirestore(app)
-console.log('xd')

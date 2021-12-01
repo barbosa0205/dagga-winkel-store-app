@@ -20,8 +20,8 @@ import { Alert } from '../components/Alert'
 export const LoginPage = () => {
     const location = useLocation()
     const { login } = useAuth()
-    const [formAlert, setFormAlert] = useState(false)
-    let user = true
+
+    const [loginStatus, setLoginStatus] = useState(null)
 
     const {
         formValues,
@@ -29,8 +29,6 @@ export const LoginPage = () => {
         handleForm,
         handleInputChange,
         handleBlur,
-        loading,
-        setLoading,
         errors,
     } = useForm(
         {
@@ -40,13 +38,12 @@ export const LoginPage = () => {
         validationsLoginForm
     )
 
-    const setLogin = () => {
+    const setLogin = async () => {
         const allCorrect = handleForm()
         if (allCorrect) {
-            setLoading(true)
-            user = login(formValues, location.state?.from)
-            !user && setFormAlert(true)
-            setLoading(false)
+            const status = await login(formValues, location.state?.from)
+            console.log(status)
+            setLoginStatus(status)
         }
     }
 
@@ -88,8 +85,10 @@ export const LoginPage = () => {
                                 setLogin()
                             }}
                         />
-                        {loading && <p>cargando...</p>}
-                        {formAlert && <Alert text="Este usuario no existe" />}
+
+                        {loginStatus?.error && (
+                            <Alert text="Correo o contraseña no coincide" />
+                        )}
                     </form>
                     <p>
                         No tienes una cuenta?
