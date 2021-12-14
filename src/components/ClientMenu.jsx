@@ -8,6 +8,7 @@ import {
     settingsContainer,
     itemsContainer,
     subMenu,
+    welcomeContainer,
 } from '../styles/components/clientMenu.module.scss'
 import { AsideItem } from './Aside/AsideItem'
 import { Icon } from './Icon'
@@ -34,7 +35,11 @@ export const ClientMenu = () => {
                             onClick={toggleMenu}
                         ></i>
                     </div>
+                    <div className={welcomeContainer}>
+                        <p>Bienvenid@ {user.name}</p>
+                    </div>
                 </div>
+
                 <SubMenu isVisible={menu} menuClass={subMenu}>
                     <div className={settingsContainer}>
                         <Icon
@@ -49,16 +54,13 @@ export const ClientMenu = () => {
                         <AsideItem
                             to={routes.profile}
                             text="Mi perfil"
-                            onClick={() => {
-                                toggle()
-                            }}
+                            onClick={toggleMenu}
                         />
+
                         <AsideItem
                             to="/"
                             text="Favoritos"
-                            onClick={() => {
-                                toggle()
-                            }}
+                            onClick={toggleMenu}
                         />
                         <AsideItem
                             to={routes.home}

@@ -4,13 +4,13 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 // Añadimos las credenciales
 export const firebaseApp = {
-    apiKey: 'AIzaSyCzxPk_0XOYR9RnD61AAIc_-aBgE-jTpqU',
-    authDomain: 'dagga-winkel-ecommerce.firebaseapp.com',
-    projectId: 'dagga-winkel-ecommerce',
-    storageBucket: 'dagga-winkel-ecommerce.appspot.com',
-    messagingSenderId: '464799535723',
-    appId: '1:464799535723:web:fea760da257c4f72cf172e',
-    measurementId: 'G-R5KBRF8LQD',
+    apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+    appId: process.env.REACT_APP_FIREBASE_APPID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
 }
 
 export const app = initializeApp(firebaseApp)

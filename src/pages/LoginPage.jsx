@@ -42,7 +42,6 @@ export const LoginPage = () => {
         const allCorrect = handleForm()
         if (allCorrect) {
             const status = await login(formValues, location.state?.from)
-            console.log(status)
             setLoginStatus(status)
         }
     }
@@ -86,8 +85,18 @@ export const LoginPage = () => {
                             }}
                         />
 
-                        {loginStatus?.error && (
-                            <Alert text="Correo o contraseña no coincide" />
+                        {(loginStatus?.error === 'auth/wrong-password' ||
+                            loginStatus?.error === 'auth/user-not-found') && (
+                            <Alert
+                                text="Correo o contraseña no coincide"
+                                color="red"
+                            />
+                        )}
+                        {loginStatus?.error === 'auth/too-many-requests' && (
+                            <Alert
+                                text="Demasiados intentos, intente mas tarde"
+                                color="red"
+                            />
                         )}
                     </form>
                     <p>

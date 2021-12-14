@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { CategoriesList } from '../components/CategoriesList'
-import { ProductsPreview } from '../components/ProductsPreview'
+import { ProductsPreview } from '../components/products/ProductsPreview'
 import { Slider } from '../components/Slider'
-
-import { allProducts } from '../db/products.api'
+import { useCart } from '../contexts/cart/useCart'
 
 export const MainPage = () => {
-    const [products, setProducts] = useState(null)
-    const [cheapProducts, setCheapProducts] = useState(null)
-    useEffect(() => {
-        setProducts(allProducts)
-        setCheapProducts(allProducts.sort((a, b) => a.price - b.price))
-    }, [])
+    const { products } = useCart()
+
     return (
         <>
             <Slider imagesList={[]} />
@@ -20,7 +15,6 @@ export const MainPage = () => {
                 title="Agregados Recientemente"
                 products={products}
             />
-            <ProductsPreview title="De Temporada" products={cheapProducts} />
         </>
     )
 }

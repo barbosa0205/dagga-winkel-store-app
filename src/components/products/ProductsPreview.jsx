@@ -1,10 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import {
     mainContainer,
     titleContainer,
     productsContainer,
-} from '../styles/components/productsPreview.module.scss'
+} from '../../styles/components/productsPreview.module.scss'
 import { Product } from './Product'
 import { Link } from 'react-router-dom'
 
@@ -18,10 +17,7 @@ export const ProductsPreview = props => {
             <div className={`${productsContainer}`}>
                 {props.products &&
                     props.products.map(product => (
-                        <Product
-                            key={product.product_id}
-                            productData={product}
-                        />
+                        <Product key={product.id} productData={product} />
                     ))}
             </div>
         </div>

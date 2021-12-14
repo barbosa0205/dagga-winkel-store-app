@@ -135,7 +135,10 @@ export const RegisterPage = () => {
                             </div>
                         </div>
                         {newUser?.error && (
-                            <Alert text="Este usuario ya ha sido registrado" />
+                            <Alert
+                                text="Este usuario ya ha sido registrado"
+                                color="red"
+                            />
                         )}
                         <Button
                             type="submit"

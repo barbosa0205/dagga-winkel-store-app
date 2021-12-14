@@ -4,9 +4,6 @@
     max-width: 120rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-
     & > .titleContainer {
         width: 100%;
         display: flex;
@@ -25,10 +22,10 @@
     }
     & > .productsContainer {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        min-height: 13rem;
+        width: 90%;
+        margin: 0 auto;
+        min-width: 28rem;
+        min-height: 35rem;
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
     }

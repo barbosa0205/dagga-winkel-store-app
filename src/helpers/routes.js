@@ -10,4 +10,5 @@ export const routes = {
     product: productId => `/products/:${productId}`,
     profile: '/profile',
     settings: '/settings',
+    cPanel: '/cpanel',
 }

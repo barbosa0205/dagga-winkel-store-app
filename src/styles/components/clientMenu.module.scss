@@ -11,9 +11,21 @@
 
 .clientContainer {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     width: 100%;
     padding: 0.5rem 0 1rem 0;
+
+    & > .welcomeContainer {
+        text-align: center;
+        width: 100%;
+
+        & > p {
+            font-size: 2.3rem;
+            margin: 1rem;
+        }
+    }
 }
 
 .clientImg {
@@ -69,6 +81,12 @@
     }
     .clientContainer {
         justify-content: flex-end;
+        & > .welcomeContainer {
+            & > p {
+                font-size: 1.8rem;
+                margin: 1rem;
+            }
+        }
     }
 
     .clientImg {

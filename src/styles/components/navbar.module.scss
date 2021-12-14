@@ -4,10 +4,12 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+    margin: 0 auto;
     min-height: 10rem;
-    padding: 0 2rem;
-    border-bottom: 1px solid var(--light-gray);
+    padding: 2rem 2rem 1rem 2rem;
 
+    background: var(--white);
+    z-index: 9;
     & > .navGroup {
         display: flex;
         flex-wrap: wrap;
@@ -24,6 +26,7 @@
         & > .navGroup {
             justify-content: space-around;
             flex-wrap: nowrap;
+            margin: 0;
 
             & > i {
                 display: none;

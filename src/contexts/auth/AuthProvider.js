@@ -19,6 +19,7 @@ import {
     query,
     onSnapshot,
 } from 'firebase/firestore'
+import { nanoid } from 'nanoid'
 
 //Creamos nuestro contexto
 export const AuthContext = createContext()
@@ -30,15 +31,16 @@ export const AuthProvider = ({ children }) => {
     //states
     const [toggleMenu, setToggleMenu] = useState(false)
     const [user, setUser] = useState(null)
+    const [avatar, setAvatar] = useState(null)
 
     const userAlreadyRegister = async newUser => {
         try {
-            createUserWithEmailAndPassword(
+            const data = await createUserWithEmailAndPassword(
                 auth,
                 newUser.email,
                 md5(newUser.password)
             )
-
+            console.log(data)
             return {
                 isRegistrable: true,
             }
@@ -57,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     const createNewUser = async newUser => {
         try {
             const docUser = await addDoc(collection(db, 'users'), {
+                clientID: nanoid(),
                 role: roles.client,
                 name: newUser.name.trim(),
                 lastname: newUser.lastname.trim(),
@@ -76,7 +79,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUserData = async (email, fromLocation) => {
         try {
-            console.log(email)
+            // console.log(email)
             const colRef = collection(db, 'users')
             const q = query(colRef, where('email', '==', email))
             onSnapshot(q, snapshot => {
@@ -148,6 +151,8 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         register,
+        avatar,
+        setAvatar,
     } //deberia ser memorizado, lo haremos despues cuando veamos la necesidad
 
     return (

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router'
 import {
     changeProfileContainer,
     optionContainer,
@@ -11,49 +11,99 @@ import { Avatars } from './Avatars'
 import { useAuth } from '../contexts/auth/useAuth'
 import { useForm } from '../hooks/useForm'
 import { Button } from './Button'
+import {
+    collection,
+    doc,
+    getDoc,
+    onSnapshot,
+    query,
+    setDoc,
+    updateDoc,
+    where,
+} from '@firebase/firestore'
+import { db } from '../firebase/credentials'
+import { Alert } from './Alert'
 
-export const ChangeProfile = ({ menu, toggleMenu }) => {
-    const { user, setUser } = useAuth()
+export const ChangeProfile = React.memo(({ menu, toggleMenu }) => {
+    const history = useHistory()
+
+    const { user, setUser, avatar, setAvatar } = useAuth()
     const { formValues, preventSubmit, handleInputChange } = useForm({
         name: user.name,
         lastname: user.lastname,
     })
     const fileInput = useRef()
 
-    const [avatar, setAvatar] = useState(null)
+    const [errorAlert, setErrorAlert] = useState(false)
+    const [clientId, setClientId] = useState(null)
+    const [alertSuccess, setAlertSuccess] = useState(false)
+
+    useEffect(() => {
+        const asyncFunction = () => {
+            clientId && updateClientData()
+            setClientId(null)
+        }
+        asyncFunction()
+    }, [clientId])
+
+    const updateClientData = async () => {
+        try {
+            console.log(clientId)
+            const clientRef = doc(db, 'users', clientId)
+            await updateDoc(clientRef, {
+                name: user.name,
+                lastname: user.lastname,
+                img: user.img,
+            })
+        } catch (error) {
+            console.log(error)
+            setErrorAlert(true)
+        }
+    }
+    const getClientId = async () => {
+        try {
+            const colRef = collection(db, 'users')
+            const q = query(colRef, where('email', '==', user.email))
+
+            onSnapshot(q, snapshot => {
+                let data = snapshot.docs.find(doc => doc)
+                const id = data.id
+
+                setClientId(id)
+                setAlertSuccess(true)
+            })
+        } catch (error) {
+            console.log(error)
+            setErrorAlert(true)
+        }
+    }
 
     const saveChanges = () => {
-        if (
-            formValues.name.trim() === user.name &&
-            formValues.lastname.trim() === user.lastname &&
-            user.img === avatar
-        )
-            return
-        if (avatar && user.img !== avatar) {
-            setUser({
-                ...user,
-                img: avatar,
-            })
-            //TODO:AQUIMEQUEDE
-        } else if (fileInput.files[0]) {
-            setUser({
-                ...user,
-                img: avatar,
-            })
+        try {
+            if (
+                formValues.name.trim() === user.name &&
+                formValues.lastname.trim() === user.lastname &&
+                !avatar
+            )
+                return
+
+            if (
+                formValues.name.trim() !== user.name ||
+                formValues.lastname.trim() !== user.lastname ||
+                user.img !== avatar
+            ) {
+                setUser({
+                    ...user,
+                    name: formValues.name.trim(),
+                    lastname: formValues.lastname.trim(),
+                    img: avatar,
+                })
+            }
+
+            getClientId()
+        } catch (error) {
+            console.error(`Error al guardar cambios:  ${error}`)
         }
-        if (formValues.name.trim() !== user.name) {
-            setUser({
-                ...user,
-                name: formValues.name.trim(),
-            })
-        }
-        if (formValues.lastname.trim() !== user.lastname) {
-            setUser({
-                ...user,
-                lastname: formValues.lastname.trim(),
-            })
-        }
-        toggleMenu()
     }
 
     return (
@@ -86,6 +136,10 @@ export const ChangeProfile = ({ menu, toggleMenu }) => {
                 <h3>o puedes escoger un Avatar</h3>
                 <Avatars menu={menu} avatar={avatar} setAvatar={setAvatar} />
                 <div className={buttonContainer}>
+                    {errorAlert && <Alert text="ERROR" />}
+                    {alertSuccess && (
+                        <Alert text="Cambios Aplicados" color="green" />
+                    )}
                     <Button
                         type="submit"
                         size="large"
@@ -96,4 +150,4 @@ export const ChangeProfile = ({ menu, toggleMenu }) => {
             </form>
         </div>
     )
-}
+})

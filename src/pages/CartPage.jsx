@@ -1,10 +1,31 @@
 import React from 'react'
+import { Button } from '../components/Button'
 import { MainContainer } from '../components/MainContainer'
-
+import { useCart } from '../contexts/cart/useCart'
+import {
+    cartContainer,
+    buttonContainer,
+} from '../styles/pages/cartPage.module.scss'
 export const CartPage = () => {
+    const { cart } = useCart()
     return (
         <MainContainer>
-            <h1>HOLA</h1>
+            {!cart.length ? (
+                <main className={cartContainer}>
+                    <p>Aun no cuenta con productos en el carrito</p>
+                </main>
+            ) : (
+                <main>
+                    <p>HOLA</p>
+                    <div className={buttonContainer}>
+                        <Button
+                            type="button"
+                            size="large"
+                            text="Proceder con la compra"
+                        />
+                    </div>
+                </main>
+            )}
         </MainContainer>
     )
 }

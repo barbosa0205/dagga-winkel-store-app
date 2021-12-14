@@ -9,11 +9,18 @@ import { Layout } from '../components/Layout'
 import { CategoriesPage } from '../pages/CategoriesPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ProfilePage } from '../pages/ProfilePage'
+import { Cpanel } from '../pages/Cpanel'
 export const MainRoutes = () => {
     return (
         <>
             <Layout>
                 <Switch>
+                    <PrivateRoute
+                        hasRole={roles.admin}
+                        exact
+                        path={routes.cPanel}
+                        component={Cpanel}
+                    />
                     <PrivateRoute
                         hasRole={roles.client}
                         exact
