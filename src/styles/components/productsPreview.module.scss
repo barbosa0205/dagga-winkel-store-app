@@ -1,9 +1,12 @@
 .mainContainer {
     margin: 1rem 0;
-    width: 95%;
+    width: 98%;
     max-width: 120rem;
+    height: auto;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+
     & > .titleContainer {
         width: 100%;
         display: flex;
@@ -22,10 +25,12 @@
     }
     & > .productsContainer {
         display: flex;
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
         min-width: 28rem;
-        min-height: 35rem;
+        background: var(--dark-white);
+        border: 1px solid var(--light-gray);
+        border-radius: 0.6rem;
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
     }

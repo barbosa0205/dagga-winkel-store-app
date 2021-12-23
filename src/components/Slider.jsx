@@ -16,6 +16,9 @@ export const Slider = () => {
 
     useEffect(() => {
         readData(setImages, 'images')
+        return () => {
+            setImages([])
+        }
     }, [])
     useEffect(() => {
         setImageToShow(images[0])

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { routes } from '../../helpers/routes'
 
 import {
     productContainer,
@@ -12,6 +14,8 @@ import {
 } from '../../styles/components/product.module.scss'
 
 export const Product = ({ productData }) => {
+    const history = useHistory()
+
     const { product_name, price, free_shipping, colors, images } = productData
     const [colorImage, setColorImage] = useState(null)
 
@@ -22,7 +26,10 @@ export const Product = ({ productData }) => {
 
     return (
         <article className={`${productContainer}`}>
-            <picture className={`${product}`}>
+            <picture
+                className={`${product}`}
+                onClick={() => history.push(routes.product(productData.id))}
+            >
                 {!colorImage ? (
                     <img src={images[0].image} alt={images[0].image_color} />
                 ) : (
@@ -38,10 +45,15 @@ export const Product = ({ productData }) => {
                         Envio Gratis
                     </p>
                 )}
-                <p className={nameProduct}>{product_name}</p>
+                <p
+                    className={nameProduct}
+                    onClick={() => history.push(routes.product(productData.id))}
+                >
+                    {product_name}
+                </p>
                 <ul className={colorsSection}>
-                    {colors &&
-                        colors.map((color, index) => (
+                    {colors.length > 1 &&
+                        colors.map(color => (
                             <li
                                 key={color.color_name}
                                 style={{

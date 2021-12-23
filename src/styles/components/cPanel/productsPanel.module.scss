@@ -1,0 +1,43 @@
+.productsPanel {
+    width: 95%;
+    max-width: 60rem;
+    min-height: 20rem;
+    margin: 1rem auto;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 1rem;
+
+    & > h2 {
+        margin: 0;
+        text-align: center;
+        font-size: 1.6rem;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+
+        & > .optionsContainer {
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            & > li {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 4rem;
+                height: 3rem;
+                background: var(--main);
+                cursor: pointer;
+                border-radius: 0.4rem;
+                margin: 0 0.5rem;
+                & > i {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+}

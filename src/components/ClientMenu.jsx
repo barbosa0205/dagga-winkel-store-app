@@ -18,7 +18,7 @@ import { routes } from '../helpers/routes'
 import { UserImg } from './UserImg'
 import { SubMenu } from './menus/SubMenu'
 
-export const ClientMenu = () => {
+export const ClientMenu = ({ asideToggle }) => {
     const { menu, toggleMenu } = useMenu()
     const { user, logout, toggle } = useAuth()
 
@@ -54,13 +54,19 @@ export const ClientMenu = () => {
                         <AsideItem
                             to={routes.profile}
                             text="Mi perfil"
-                            onClick={toggleMenu}
+                            onClick={() => {
+                                toggleMenu()
+                                asideToggle()
+                            }}
                         />
 
                         <AsideItem
                             to="/"
                             text="Favoritos"
-                            onClick={toggleMenu}
+                            onClick={() => {
+                                toggleMenu()
+                                asideToggle()
+                            }}
                         />
                         <AsideItem
                             to={routes.home}

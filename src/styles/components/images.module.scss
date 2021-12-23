@@ -1,0 +1,83 @@
+.title {
+    grid-area: imageTitle;
+}
+
+.imageContainer {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    background: var(--white);
+    grid-area: images;
+    scroll-snap-type: x;
+    overflow-x: scroll;
+    border: 1px solid var(--light-gray);
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+    & > i {
+        padding: 0.5rem;
+        border: 2px solid var(--gray);
+        border-radius: 0.3rem;
+        height: 3.2rem;
+        cursor: pointer;
+        &:hover {
+            border: 2px solid var(--dark-transparent);
+        }
+    }
+
+    & > img {
+        margin: 0 0.5rem;
+        width: 7rem;
+        height: 7rem;
+        object-position: center;
+        object-fit: cover;
+    }
+}
+
+.errorImage {
+    border: 1px solid var(--danger);
+}
+
+.errorTitle {
+    color: var(--danger);
+}
+
+.addImageContainer {
+    width: 70%;
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    background: var(--dark-white);
+
+    & .closeContainer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        & > i {
+            font-size: 2.2rem;
+            margin: 1rem;
+            cursor: pointer;
+        }
+    }
+
+    & .addImage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+        padding: 1rem;
+        background: var(--white);
+        & > input {
+            padding: 0.5rem 1rem;
+            margin: 1rem 0;
+            border-bottom: 1px solid var(--main);
+        }
+        .errorText {
+            font-size: 1.2rem;
+            color: var(--danger);
+        }
+    }
+}

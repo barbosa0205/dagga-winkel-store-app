@@ -10,7 +10,7 @@
         position: static;
         width: 100%;
         min-height: 0;
-        padding-top: 2rem;
+        padding-top: 1rem;
         z-index: 0;
         border-top: 1px solid var(--light-gray);
     }
@@ -58,11 +58,3 @@
     left: -100%;
     transition: 0.4s ease-in-out;
 }
-
-// @media (min-width: 720px) {
-//     .asideContainer {
-//         & > .menuItemsContainer {
-//             justify-content: space-around;
-//         }
-//     }
-// }

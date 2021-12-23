@@ -36,7 +36,11 @@ export const Navbar = () => {
                 </div>
             </nav>
             <Aside toggleMenu={toggleMenu} toggle={toggle} tabletHidden>
-                {isLogged() ? <ClientMenu /> : <GuestMenu />}
+                {isLogged() ? (
+                    <ClientMenu asideToggle={toggle} />
+                ) : (
+                    <GuestMenu />
+                )}
                 <Menu />
                 {user?.role === roles.admin && <AdminMenu />}
             </Aside>

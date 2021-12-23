@@ -1,0 +1,59 @@
+.recentProductsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 22.5rem;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    background: var(--dark-white);
+
+    & > h3 {
+        font-weight: 300;
+        font-size: 1.8rem;
+        color: var(--main);
+    }
+
+    & > .recentProductItem {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 0.3rem 0;
+        background: var(--white);
+        @media (min-width: 320px) {
+            flex-direction: row;
+        }
+        & > img {
+            width: 5rem;
+            max-height: 5rem;
+            object-fit: contain;
+        }
+    }
+
+    .productDataContainer {
+        height: 100%;
+
+        & > p:first-child {
+            font-weight: 500;
+        }
+    }
+
+    .optionsContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        margin: 0.5rem 0.5rem 0 0;
+        border-radius: 0.5rem;
+        background: var(--light-gray);
+        & > i {
+            font-size: 2.3rem;
+            padding: 0.3rem;
+            cursor: pointer;
+        }
+    }
+}

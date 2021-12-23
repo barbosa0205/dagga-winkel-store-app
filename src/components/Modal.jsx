@@ -1,5 +1,9 @@
 import React from 'react'
-import { modal } from '../styles/components/modal.module.scss'
-export const Modal = ({ children }) => {
-    return <div className={modal}>{children}</div>
+import { modal, shadow } from '../styles/components/modal.module.scss'
+export const Modal = ({ children, withShadow = true }) => {
+    return (
+        <div className={`${modal} ${withShadow ? shadow : null}`}>
+            {children}
+        </div>
+    )
 }

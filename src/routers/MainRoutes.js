@@ -10,6 +10,8 @@ import { CategoriesPage } from '../pages/CategoriesPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ProfilePage } from '../pages/ProfilePage'
 import { Cpanel } from '../pages/Cpanel'
+import { ProductPage } from '../pages/products/ProductPage'
+
 export const MainRoutes = () => {
     return (
         <>
@@ -32,6 +34,12 @@ export const MainRoutes = () => {
                         exact
                         path={routes.cart}
                         component={CartPage}
+                    />
+                    <Route
+                        hasRole={roles.client}
+                        exact
+                        path={routes.product(':id')}
+                        component={ProductPage}
                     />
                     <Route
                         exact

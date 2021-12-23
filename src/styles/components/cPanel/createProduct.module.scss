@@ -1,0 +1,96 @@
+.createProductContainer {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 55rem;
+    height: 90vh;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 0.7rem;
+    scroll-snap-type: y;
+    overflow-y: scroll;
+
+    & .closeContainer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        & > i {
+            font-size: 2.5rem;
+            margin: 0 1rem;
+            cursor: pointer;
+        }
+    }
+
+    & > h2 {
+        margin-top: 0;
+        margin-bottom: 3rem;
+    }
+
+    & .createProductForm {
+        width: 100%;
+        display: grid;
+        justify-content: center;
+        gap: 2rem 0;
+        grid-template-areas:
+            'imageTitle    imageTitle'
+            'images        images'
+            'productTitle  productTitle'
+            'price         price'
+            'description  description'
+            'categories   .'
+            'colorTitle   colorTitle'
+            'colors       colors'
+            'button       button'
+            'errors       errors';
+        & > input {
+            border-bottom: 1px solid var(--main);
+        }
+
+        & .inputError {
+            border-bottom: 1px solid var(--danger);
+            &::placeholder {
+                color: var(--danger);
+            }
+        }
+
+        & > label {
+            margin: 0 1rem;
+            & select {
+                margin: 0 0.5rem;
+            }
+        }
+
+        & .labelError {
+            color: var(--danger);
+        }
+
+        & .productTitle {
+            grid-area: productTitle;
+        }
+        & .price {
+            grid-area: price;
+        }
+        & .description {
+            grid-area: description;
+        }
+        & .categoriesStyle {
+            grid-area: categories;
+        }
+
+        & > button {
+            grid-area: button;
+        }
+        & > .errorsContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px 0;
+            grid-area: errors;
+            & .errorStyle {
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: var(--danger);
+            }
+        }
+    }
+}

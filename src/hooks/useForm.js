@@ -16,8 +16,8 @@ export const useForm = (initialValues, validationsForm) => {
     const handleForm = () => {
         let values = Object.values(formValues)
         const valueLength = values.length
-        let result
-        result = values.filter(value => !!value)
+
+        let result = values.filter(value => !!value)
 
         if (result.length !== valueLength) return false
 

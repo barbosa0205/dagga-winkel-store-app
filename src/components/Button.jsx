@@ -20,5 +20,6 @@ export const Button = ({ type, size, text, ...rest }) => {
 
 Button.propTypes = {
     type: PropTypes.string.isRequired,
+    text: PropTypes.string,
     size: PropTypes.string,
 }
