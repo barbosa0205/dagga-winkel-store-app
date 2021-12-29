@@ -5,14 +5,12 @@ import {
     sliderContainer,
     sliderControls,
 } from '../styles/components/slider.module.scss'
+import { useSpring, animated } from 'react-spring'
 import { Icon } from './Icon'
 
 export const Slider = () => {
     const [images, setImages] = useState([])
-    const [imageToShow, setImageToShow] = useState({
-        id: '',
-    })
-    const [nextImage, setNextImage] = useState(false)
+    const [imageToShow, setImageToShow] = useState(null)
 
     useEffect(() => {
         readData(setImages, 'images')
@@ -22,7 +20,14 @@ export const Slider = () => {
     }, [])
     useEffect(() => {
         setImageToShow(images[0])
-    }, [images])
+    }, [])
+
+    const props = useSpring({
+        to: { opacity: 1 },
+        from: { opacity: 0 },
+        delay: 300,
+        onDelayEnd: 100,
+    })
 
     const showNext = () => {
         const arrayLength = images.length
@@ -53,27 +58,43 @@ export const Slider = () => {
     }
 
     return (
-        <section className={sliderContainer}>
-            <img src={imageToShow?.image} alt={imageToShow?.alt} />
-            <div className={sliderControls}>
-                <Icon className="ri-arrow-left-s-line" onClick={showPreview} />
-                <Icon className="ri-arrow-right-s-line" onClick={showNext} />
-                <footer>
-                    {images.map(({ name, id }) =>
-                        imageToShow?.id === id ? (
-                            <Icon
-                                key={name}
-                                className="ri-checkbox-blank-circle-fill"
-                            />
-                        ) : (
-                            <Icon
-                                key={name}
-                                className="ri-checkbox-blank-circle-line"
-                            />
-                        )
-                    )}
-                </footer>
-            </div>
-        </section>
+        <>
+            {imageToShow && (
+                <animated.section className={sliderContainer} style={props}>
+                    <img src={imageToShow?.image} alt={imageToShow?.alt} />
+                    <div className={sliderControls}>
+                        <Icon
+                            className="ri-arrow-left-s-line"
+                            onClick={() => {
+                                imageToShow && setImageToShow(null)
+                                showPreview()
+                            }}
+                        />
+                        <Icon
+                            className="ri-arrow-right-s-line"
+                            onClick={() => {
+                                imageToShow && setImageToShow(null)
+                                showNext()
+                            }}
+                        />
+                        <footer>
+                            {images.map(({ name, id }) =>
+                                imageToShow?.id === id ? (
+                                    <Icon
+                                        key={name}
+                                        className="ri-checkbox-blank-circle-fill"
+                                    />
+                                ) : (
+                                    <Icon
+                                        key={name}
+                                        className="ri-checkbox-blank-circle-line"
+                                    />
+                                )
+                            )}
+                        </footer>
+                    </div>
+                </animated.section>
+            )}
+        </>
     )
 }

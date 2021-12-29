@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { roles } from '../../helpers/roles'
 import { createAvatar } from '@dicebear/avatars'
@@ -18,6 +18,8 @@ import {
     where,
     query,
     onSnapshot,
+    doc,
+    getDoc,
 } from 'firebase/firestore'
 import { nanoid } from 'nanoid'
 
@@ -25,13 +27,31 @@ import { nanoid } from 'nanoid'
 export const AuthContext = createContext()
 
 //Creamos el provider de autenticacion
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ token, setToken, children }) => {
     const history = useHistory()
 
     //states
     const [toggleMenu, setToggleMenu] = useState(false)
     const [user, setUser] = useState(null)
     const [avatar, setAvatar] = useState(null)
+
+    useEffect(() => {
+        if (localStorage.getItem('user-dagga-winkel') && !user) {
+            ;(async () => {
+                try {
+                    const uid = localStorage.getItem('user-dagga-winkel')
+                    const docRef = doc(db, 'users', uid)
+                    const data = await getDoc(docRef)
+                    setUser({
+                        ...data.data(),
+                        id: data.id,
+                    })
+                } catch (error) {
+                    console.error('ERROR AL AÑADIR USUARIO A SETUSER', error)
+                }
+            })()
+        }
+    }, [])
 
     const userAlreadyRegister = async newUser => {
         try {
@@ -84,7 +104,15 @@ export const AuthProvider = ({ children }) => {
             const q = query(colRef, where('email', '==', email))
             onSnapshot(q, snapshot => {
                 let data = snapshot.docs.find(doc => doc)
-                setUser(data.data())
+                setUser({
+                    ...data.data(),
+                    id: data.id,
+                })
+                if (!localStorage.getItem('user-dagga-winkel')) {
+                    localStorage.setItem('user-dagga-winkel', data.id)
+                }
+                setToken(data.id)
+
                 if (data) {
                     if (fromLocation) {
                         history.push(fromLocation)
@@ -114,7 +142,10 @@ export const AuthProvider = ({ children }) => {
                 email,
                 md5(password)
             )
-            getUserData(isLogin.user.email, fromLocation)
+
+            await getUserData(isLogin.user.email, fromLocation)
+            console.log(isLogin)
+
             return true
         } catch (error) {
             const errorCode = error.code
@@ -128,7 +159,11 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const logout = () => setUser(null)
+    const logout = () => {
+        setUser(null)
+        setToken('')
+        localStorage.clear()
+    }
 
     const isLogged = () => !!user
 

@@ -4,6 +4,7 @@ import {
     titleContainer,
     productsContainer,
 } from '../../styles/components/productsPreview.module.scss'
+
 import { Product } from './Product'
 import { Link } from 'react-router-dom'
 

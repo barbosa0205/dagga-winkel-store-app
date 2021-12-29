@@ -6,11 +6,11 @@ import { CartPage } from '../pages/CartPage'
 import { routes } from '../helpers/routes'
 import { roles } from '../helpers/roles'
 import { Layout } from '../components/Layout'
-import { CategoriesPage } from '../pages/CategoriesPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ProfilePage } from '../pages/ProfilePage'
 import { Cpanel } from '../pages/Cpanel'
 import { ProductPage } from '../pages/products/ProductPage'
+import { ProductsSearchedPage } from '../pages/products/ProductsSearchedPage'
 
 export const MainRoutes = () => {
     return (
@@ -42,10 +42,12 @@ export const MainRoutes = () => {
                         component={ProductPage}
                     />
                     <Route
+                        hasRole={roles.client}
                         exact
-                        path={routes.categories}
-                        component={CategoriesPage}
+                        path={routes.search(':id')}
+                        component={ProductsSearchedPage}
                     />
+
                     <Route exact path={routes.home} component={MainPage} />
                     <Route path="*" component={NotFoundPage} />
                 </Switch>

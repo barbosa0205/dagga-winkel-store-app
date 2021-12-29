@@ -2,7 +2,6 @@ import { navContainer, navGroup } from '../styles/components/navbar.module.scss'
 import { Logo } from './Logo'
 import { Icon } from './Icon'
 import { Search } from './Search'
-import { CartShop } from './CartShop'
 import { Aside } from './Aside'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/auth/useAuth'
@@ -25,14 +24,13 @@ export const Navbar = () => {
                     />
 
                     <Search />
-                    <CartShop>
-                        <Icon>
-                            <Link
-                                className="ri-shopping-cart-line icon"
-                                to="/cart"
-                            ></Link>
-                        </Icon>
-                    </CartShop>
+
+                    <Icon>
+                        <Link
+                            className="ri-shopping-cart-line icon"
+                            to="/cart"
+                        ></Link>
+                    </Icon>
                 </div>
             </nav>
             <Aside toggleMenu={toggleMenu} toggle={toggle} tabletHidden>

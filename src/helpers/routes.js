@@ -7,6 +7,7 @@ export const routes = {
     category: category => `/categories/${category}`,
     cart: '/cart',
     products: '/products',
+    search: productId => `/search/${productId}`,
     product: productId => `/products/${productId}`,
     profile: '/profile',
     settings: '/settings',

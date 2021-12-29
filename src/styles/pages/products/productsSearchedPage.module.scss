@@ -1,0 +1,33 @@
+.mainContainer {
+    min-height: 90vh;
+
+    & .productsContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & .productContainer {
+            min-width: 25rem;
+            min-height: 25rem;
+            margin: 1rem 0;
+            border-radius: 1rem;
+            border: 2px solid var(--dark-white);
+
+            & > img {
+                width: 100%;
+                height: 15rem;
+                object-position: center;
+                object-fit: contain;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid var(--dark-white);
+            }
+
+            & > .productTitle {
+                text-align: center;
+                font-size: 1.8rem;
+                font-weight: 500;
+            }
+        }
+    }
+}

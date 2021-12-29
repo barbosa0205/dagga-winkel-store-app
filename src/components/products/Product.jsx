@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { routes } from '../../helpers/routes'
-
+import { useSpring, animated } from 'react-spring'
 import {
     productContainer,
     product,
@@ -16,6 +16,13 @@ import {
 export const Product = ({ productData }) => {
     const history = useHistory()
 
+    const props = useSpring({
+        to: { opacity: 1 },
+        from: { opacity: 0 },
+        delay: 300,
+        onDelayEnd: 100,
+    })
+
     const { product_name, price, free_shipping, colors, images } = productData
     const [colorImage, setColorImage] = useState(null)
 
@@ -25,11 +32,12 @@ export const Product = ({ productData }) => {
     }
 
     return (
-        <article className={`${productContainer}`}>
-            <picture
-                className={`${product}`}
-                onClick={() => history.push(routes.product(productData.id))}
-            >
+        <animated.article
+            style={props}
+            className={`${productContainer}`}
+            onClick={() => history.push(routes.product(productData.id))}
+        >
+            <picture className={`${product}`}>
                 {!colorImage ? (
                     <img src={images[0].image} alt={images[0].image_color} />
                 ) : (
@@ -66,6 +74,6 @@ export const Product = ({ productData }) => {
                         ))}
                 </ul>
             </footer>
-        </article>
+        </animated.article>
     )
 }
