@@ -1,6 +1,13 @@
 .mainContainer {
     min-height: 90vh;
 
+    & > h2 {
+        font-weight: 400;
+        & > span {
+            font-weight: 500;
+        }
+    }
+
     & .productsContainer {
         width: 100%;
         display: flex;
@@ -28,6 +35,11 @@
                 font-size: 1.8rem;
                 font-weight: 500;
             }
+        }
+        & > .noMatchProducts {
+            text-align: center;
+            font-weight: 400;
+            margin-top: 5rem;
         }
     }
 }

@@ -5,6 +5,7 @@ import { useCart } from '../contexts/cart/useCart'
 import {
     cartContainer,
     buttonContainer,
+    noProducts,
 } from '../styles/pages/cartPage.module.scss'
 export const CartPage = () => {
     const { cart } = useCart()
@@ -12,7 +13,9 @@ export const CartPage = () => {
         <MainContainer>
             {!cart.length ? (
                 <main className={cartContainer}>
-                    <p>Aun no cuenta con productos en el carrito</p>
+                    <p className={noProducts}>
+                        Aun no cuenta con productos en el carrito
+                    </p>
                 </main>
             ) : (
                 <main>

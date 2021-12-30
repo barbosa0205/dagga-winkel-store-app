@@ -27,16 +27,15 @@ export const Product = ({ productData }) => {
     const [colorImage, setColorImage] = useState(null)
 
     const changeImageColor = colorName => {
-        const image = images.find(image => image.image_color === colorName)
-        setColorImage(image)
+        console.log(colorName)
+        const img = images.find(image => {
+            return image.image_color === colorName
+        })
+        console.log(img)
+        setColorImage(img)
     }
-
     return (
-        <animated.article
-            style={props}
-            className={`${productContainer}`}
-            onClick={() => history.push(routes.product(productData.id))}
-        >
+        <animated.article style={props} className={`${productContainer}`}>
             <picture className={`${product}`}>
                 {!colorImage ? (
                     <img src={images[0].image} alt={images[0].image_color} />
