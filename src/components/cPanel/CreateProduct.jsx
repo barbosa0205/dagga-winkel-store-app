@@ -42,7 +42,7 @@ export const CreateProduct = ({ setClose }) => {
     const [images, setImages] = useState([])
     const [imageErrors, setImageErrors] = useState('')
     const [colorPalette, setColorPalette] = useState([])
-
+    const [failedUpload, setFailedUpload] = useState(false)
     useEffect(() => {
         if (images.length) {
             setImageErrors('')
@@ -77,8 +77,9 @@ export const CreateProduct = ({ setClose }) => {
             }
             uploadProduct(data)
 
-            console.log('subido')
+            setClose(c => !c)
         } else {
+            setFailedUpload(true)
             return null
         }
     }
@@ -170,6 +171,9 @@ export const CreateProduct = ({ setClose }) => {
                     onClick={createProduct}
                 />
                 <div className={errorsContainer}>
+                    {failedUpload && (
+                        <p className={errorStyle}>Fallo al crear producto</p>
+                    )}
                     {imageErrors && <p className={errorStyle}>{imageErrors}</p>}
                     {errors.title && (
                         <p className={errorStyle}>-{errors.title}</p>

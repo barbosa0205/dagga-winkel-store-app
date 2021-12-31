@@ -36,7 +36,10 @@ export const Product = ({ productData }) => {
     }
     return (
         <animated.article style={props} className={`${productContainer}`}>
-            <picture className={`${product}`}>
+            <picture
+                className={`${product}`}
+                onClick={() => history.push(routes.product(productData.id))}
+            >
                 {!colorImage ? (
                     <img src={images[0].image} alt={images[0].image_color} />
                 ) : (
@@ -45,13 +48,7 @@ export const Product = ({ productData }) => {
             </picture>
             <footer className={`${infoProductContainer}`}>
                 <h3 className={priceText}>{`$${price}`}</h3>
-                {free_shipping ? (
-                    <p className={freeShipping}>Envio Gratis</p>
-                ) : (
-                    <p className={`${freeShipping} ${freeShippingInvisible}`}>
-                        Envio Gratis
-                    </p>
-                )}
+                {free_shipping && <p className={freeShipping}>Envio Gratis</p>}
                 <p
                     className={nameProduct}
                     onClick={() => history.push(routes.product(productData.id))}

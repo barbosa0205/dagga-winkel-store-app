@@ -12,4 +12,10 @@ export const categories = [
         category_value: 'camaras',
         category_name: 'Camaras',
     },
+    {
+        category_id: nanoid(),
+        category_icon: 'ri-game-fill',
+        category_value: 'consolas_videojuegos',
+        category_name: 'Consolas y videojuegos',
+    },
 ]
