@@ -12,6 +12,7 @@ import {
     colorSquare,
     title,
     errorStyle,
+    removeColor,
 } from '../styles/components/colors.module.scss'
 import { Button } from './Button'
 import { Icon } from './Icon'
@@ -44,6 +45,11 @@ export const Colors = ({ color, setColor }) => {
         }
     }
 
+    const removeProductColor = colorId => {
+        const newArray = color.filter(c => c.colorId !== colorId)
+        setColor(newArray)
+    }
+
     return (
         <>
             <p className={title}>Colores</p>
@@ -54,12 +60,21 @@ export const Colors = ({ color, setColor }) => {
                 />
                 {color.length
                     ? color.map(c => (
-                          <i
-                              key={c.colorId}
-                              style={{ background: c.color }}
-                              className={colorSquare}
-                              title={c.color_name}
-                          ></i>
+                          <>
+                              <i
+                                  key={c.colorId}
+                                  style={{ background: c.color }}
+                                  className={colorSquare}
+                                  title={c.color_name}
+                              >
+                                  <Icon
+                                      className={`ri-close-fill ${removeColor}`}
+                                      onClick={() =>
+                                          removeProductColor(c.colorId)
+                                      }
+                                  />
+                              </i>
+                          </>
                       ))
                     : null}
             </ul>

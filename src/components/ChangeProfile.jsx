@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     changeProfileContainer,
     optionContainer,
@@ -27,7 +27,7 @@ export const ChangeProfile = React.memo(({ menu }) => {
         name: user.name,
         lastname: user.lastname,
     })
-    const fileInput = useRef()
+    // const fileInput = useRef()
 
     const [errorAlert, setErrorAlert] = useState(false)
     const [clientId, setClientId] = useState(null)
@@ -101,10 +101,10 @@ export const ChangeProfile = React.memo(({ menu }) => {
     return (
         <div className={changeProfileContainer}>
             <form onSubmit={preventSubmit}>
-                <div className={optionContainer}>
+                {/* <div className={optionContainer}>
                     <p>Cambiar foto de perfil:</p>
                     <input type="file" ref={fileInput} />
-                </div>
+                </div> */}
                 <div className={optionContainer}>
                     <p>Cambiar Nombre:</p>
                     <input
@@ -125,7 +125,7 @@ export const ChangeProfile = React.memo(({ menu }) => {
                         value={formValues.lastname}
                     />
                 </div>
-                <h3>o puedes escoger un Avatar</h3>
+                <h3>Elige un Avatar</h3>
                 <Avatars menu={menu} avatar={avatar} setAvatar={setAvatar} />
                 <div className={buttonContainer}>
                     {errorAlert && <Alert text="ERROR" />}

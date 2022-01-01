@@ -56,12 +56,12 @@ export const CreateProduct = ({ setClose }) => {
             : 'not-color'
 
     const createProduct = () => {
-        if (!formValues.title) {
-            return
-        }
         if (!images.length) {
             setImageErrors('Coloque almenos una imagen')
             return null
+        }
+        if (!formValues.title) {
+            return
         }
 
         if (!Object.keys(errors).length) {

@@ -14,7 +14,7 @@ export const categories = [
     },
     {
         category_id: nanoid(),
-        category_icon: 'ri-game-fill',
+        category_icon: 'ri-game-line',
         category_value: 'consolas_videojuegos',
         category_name: 'Consolas y videojuegos',
     },

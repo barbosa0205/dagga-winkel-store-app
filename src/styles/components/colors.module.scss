@@ -2,7 +2,6 @@
     grid-area: colorTitle;
 }
 .colorsContainer {
-    position: relative;
     display: flex;
     align-items: center;
     grid-area: colors;
@@ -23,10 +22,21 @@
     }
 
     & .colorSquare {
+        position: relative;
         padding: 1.4rem;
         margin: 0 0.5rem;
         border-radius: 0.3rem;
         border: 1px solid var(--gray);
+        & > .removeColor {
+            font-size: 1.4rem;
+            position: absolute;
+            right: -2px;
+            top: -3px;
+            color: var(--white);
+            background: var(--danger);
+            border-radius: 0.2rem;
+            cursor: pointer;
+        }
     }
 }
 .colorPickerContainer {
@@ -41,6 +51,7 @@
     background: var(--dark-white);
 
     & > .closeContainer {
+        position: relative;
         width: 100%;
         display: flex;
         justify-content: flex-end;

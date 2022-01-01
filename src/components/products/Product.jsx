@@ -27,11 +27,9 @@ export const Product = ({ productData }) => {
     const [colorImage, setColorImage] = useState(null)
 
     const changeImageColor = colorName => {
-        console.log(colorName)
         const img = images.find(image => {
             return image.image_color === colorName
         })
-        console.log(img)
         setColorImage(img)
     }
     return (

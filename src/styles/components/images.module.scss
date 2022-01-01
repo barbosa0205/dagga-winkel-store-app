@@ -24,12 +24,26 @@
         }
     }
 
-    & > img {
-        margin: 0 0.5rem;
-        width: 7rem;
-        height: 7rem;
-        object-position: center;
-        object-fit: cover;
+    & > .productImageContainer {
+        position: relative;
+        & > img {
+            margin: 0 0.5rem;
+            width: 7rem;
+            height: 7rem;
+            object-position: center;
+            object-fit: cover;
+        }
+
+        & > .removeImage {
+            font-size: 2rem;
+            position: absolute;
+            right: -2px;
+            top: -3px;
+            color: var(--white);
+            background: var(--danger);
+            border-radius: 0.6rem;
+            cursor: pointer;
+        }
     }
 }
 

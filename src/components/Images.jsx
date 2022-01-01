@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useMenu } from '../hooks/useMenu'
 import {
     imageContainer,
+    productImageContainer,
+    removeImage,
     addImageContainer,
     addImage,
     closeContainer,
@@ -44,13 +46,24 @@ export const Images = ({ images, setImages, imageErrors }) => {
         }
     }
 
+    const removeProductImage = img => {
+        const newArray = images.filter(({ image }) => image !== img)
+        setImages(newArray)
+    }
+
     return (
         <>
             <p className={`${title} ${imageErrors && errorTitle}`}>Imagenes</p>
             <ul className={`${imageContainer} ${imageErrors && errorImage}`}>
                 <Icon className="ri-add-line" onClick={toggleMenu} />
                 {images.map(({ image }) => (
-                    <img key={image} src={image} alt="product" />
+                    <div className={productImageContainer}>
+                        <Icon
+                            className={`ri-close-fill ${removeImage}`}
+                            onClick={() => removeProductImage(image)}
+                        />
+                        <img key={image} src={image} alt="product" />
+                    </div>
                 ))}
             </ul>
             {menu && (
