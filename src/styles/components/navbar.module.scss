@@ -24,7 +24,7 @@
     .navContainer {
         justify-content: center;
         & > .navGroup {
-            justify-content: space-around;
+            justify-content: space-evenly;
             flex-wrap: nowrap;
             margin: 0;
         }

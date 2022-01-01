@@ -20,7 +20,7 @@ export const Slider = () => {
     }, [])
     useEffect(() => {
         setImageToShow(images[0])
-    }, [])
+    }, [images])
 
     const props = useSpring({
         to: { opacity: 1 },

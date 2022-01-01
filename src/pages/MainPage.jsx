@@ -9,8 +9,12 @@ export const MainPage = () => {
 
     return (
         <>
-            <Slider imagesList={[]} />
+            <Slider />
             <CategoriesList />
+            <ProductsPreview
+                title="Ultimos productos Vistos"
+                products={products}
+            />
             <ProductsPreview
                 title="Agregados Recientemente"
                 products={products}
