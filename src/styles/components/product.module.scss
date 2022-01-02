@@ -1,25 +1,23 @@
 .productContainer {
     display: flex;
     flex-direction: column;
+    min-width: 22rem;
+    max-width: 23rem;
     margin: 1rem;
     box-shadow: -0.5rem 0.5rem var(--light-gray);
     border-radius: 1rem;
     background: var(--white);
 
-    & > .product {
-        display: flex;
-        width: 20rem;
-        background: var(--white);
+    & > img {
+        width: 100%;
+        max-height: 15rem;
+        object-fit: contain;
+        object-position: center;
+        padding: 0.5rem 0;
         cursor: pointer;
-        & > img {
-            width: 100%;
-            max-height: 15rem;
-            object-fit: contain;
-            object-position: center;
-            padding: 0.5rem 0;
-        }
-        border-radius: 1rem 1rem 0 0;
     }
+    border-radius: 1rem 1rem 0 0;
+
     .infoProductContainer {
         display: flex;
         flex-direction: column;
@@ -48,6 +46,10 @@
             font-size: 1.4rem;
             font-weight: 500;
             color: var(--main);
+            &:hover {
+                text-decoration: none;
+                cursor: default;
+            }
         }
 
         & > .freeShippingInvisible {

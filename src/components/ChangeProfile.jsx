@@ -34,7 +34,7 @@ export const ChangeProfile = React.memo(({ menu }) => {
     const [alertSuccess, setAlertSuccess] = useState(false)
 
     useEffect(() => {
-        if (clientId) updateClientData()
+        clientId && updateClientData()
     }, [])
 
     const updateClientData = async () => {

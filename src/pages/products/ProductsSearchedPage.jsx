@@ -15,7 +15,7 @@ export const ProductsSearchedPage = () => {
     const [productSearched, setProductSearched] = useState([])
 
     useEffect(() => {
-        searchProducts(productSearched, setProductSearched, productName)
+        searchProducts(setProductSearched, productName)
     }, [productName])
 
     return (
