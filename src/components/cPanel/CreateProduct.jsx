@@ -15,6 +15,7 @@ import {
     labelError,
     errorStyle,
     errorsContainer,
+    shipMountContainer,
 } from '../../styles/components/cPanel/createProduct.module.scss'
 
 import { Button } from '../Button'
@@ -43,6 +44,8 @@ export const CreateProduct = ({ setClose }) => {
     const [imageErrors, setImageErrors] = useState('')
     const [colorPalette, setColorPalette] = useState([])
     const [failedUpload, setFailedUpload] = useState(false)
+    const [shipMount, setShipMount] = useState(0)
+
     useEffect(() => {
         if (images.length) {
             setImageErrors('')
@@ -69,11 +72,16 @@ export const CreateProduct = ({ setClose }) => {
             const data = {
                 product_name: formValues.title,
                 desc: formValues.description,
-                free_ship: formValues.freeShip,
+                free_shipping: formValues.freeShip,
+                ship_mount:
+                    formValues.freeShip === 'true'
+                        ? 0
+                        : Number(formValues.shipMount),
                 category: formValues.categories,
-                price: formValues.price,
+                price: Number(formValues.price),
                 images: images,
                 colors: colorPalette,
+                date: new Date(),
             }
             uploadProduct(data)
 
@@ -159,10 +167,22 @@ export const CreateProduct = ({ setClose }) => {
                         onBlur={handleBlur}
                     >
                         <option value="---">---</option>
-                        <option value={'false'}>No</option>
-                        <option value={'true'}>Si</option>
+                        <option value={false}>No</option>
+                        <option value={true}>Si</option>
                     </select>
                 </label>
+                <div className={shipMountContainer}>
+                    <label>
+                        <span>Costo de envio:</span>
+                        <input
+                            type="number"
+                            disabled={formValues.freeShip === 'true'}
+                            onChange={({ target }) =>
+                                setShipMount(target.value)
+                            }
+                        />
+                    </label>
+                </div>
                 <Colors color={colorPalette} setColor={setColorPalette} />
                 <Button
                     type="submit"

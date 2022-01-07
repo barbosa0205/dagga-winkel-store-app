@@ -1,0 +1,134 @@
+main {
+    display: grid;
+    width: 100%;
+    max-width: 100rem;
+    grid-template-areas:
+        'title'
+        'image'
+        'info-container'
+        'img-preview'
+        'button'
+        'desc';
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    @media (min-width: 800px) {
+        gap: 1rem;
+        grid-template-areas:
+            'image image title title'
+            'image image info-container info-container'
+            'img-preview img-preview . .'
+            '. button button .'
+            'desc desc desc desc';
+    }
+
+    & > h1 {
+        width: 90%;
+        grid-area: title;
+        font-size: 2.5rem;
+        text-align: center;
+        font-weight: 400;
+        margin: 0 auto;
+    }
+
+    & > .mainImageClass {
+        grid-area: image;
+        width: 100%;
+        max-width: 40rem;
+        margin: 1rem auto;
+        border: 1px solid var(--light-gray);
+        border-radius: 1rem;
+    }
+
+    & > .imageList {
+        grid-area: img-preview;
+        display: flex;
+        width: auto;
+        margin: 1rem 0;
+        margin: 0 auto;
+        padding: 0 1rem;
+        background: var(--dark-white);
+        border-radius: 0.5rem;
+        border: 1px solid var(--light-gray);
+
+        & > li {
+            width: 8rem;
+            margin: 0 0.5rem;
+            & > img {
+                width: 100%;
+                height: 100%;
+                object-position: center;
+                object-fit: contain;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .infoContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        grid-area: info-container;
+        & > .price {
+            font-size: 4rem;
+            font-weight: 400;
+            margin: 0 1rem;
+        }
+        & > .freeShip {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--main);
+            margin: 0 1rem;
+        }
+    }
+
+    & > .buttonContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: button;
+        margin-top: 2rem;
+
+        & > button {
+            padding: 1.5rem 0;
+        }
+
+        & > .cartButton {
+            position: relative;
+            font-size: 3rem;
+            color: var(--warning);
+            padding: 0.5rem;
+            border: 2px solid var(--warning);
+            border-radius: 0.5rem;
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+
+        & > .added {
+            color: var(--main);
+            border: 2px solid var(--main);
+        }
+    }
+
+    .descContainer {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        grid-area: desc;
+        margin: 2rem;
+
+        & > h3 {
+            text-align: start;
+            font-weight: 500;
+        }
+
+        & > p {
+            font-size: 1.8rem;
+        }
+    }
+}

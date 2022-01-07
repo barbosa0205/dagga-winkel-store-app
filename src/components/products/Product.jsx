@@ -50,7 +50,9 @@ export const Product = ({ productData }) => {
 
             <footer className={`${infoProductContainer}`}>
                 <h3 className={priceText}>{`$${price}`}</h3>
-                {free_shipping && <p className={freeShipping}>Envio Gratis</p>}
+                {free_shipping === 'true' && (
+                    <p className={freeShipping}>Envio Gratis</p>
+                )}
                 <p
                     className={nameProduct}
                     onClick={() => history.push(routes.product(productData.id))}

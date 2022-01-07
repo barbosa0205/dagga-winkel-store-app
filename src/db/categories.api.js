@@ -18,4 +18,16 @@ export const categories = [
         category_value: 'consolas_videojuegos',
         category_name: 'Consolas y videojuegos',
     },
+    {
+        category_id: nanoid(),
+        category_icon: 'fas fa-bicycle',
+        category_value: 'bicicletas_patines',
+        category_name: 'Bicicletas y patines',
+    },
+    {
+        category_id: nanoid(),
+        category_icon: 'ri-vip-diamond-line',
+        category_value: 'joyeria',
+        category_name: 'Joyeria',
+    },
 ]

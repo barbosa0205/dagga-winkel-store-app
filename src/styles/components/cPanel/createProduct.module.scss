@@ -38,7 +38,8 @@
             'productTitle  productTitle'
             'price         price'
             'description  description'
-            'categories   .'
+            'categories   free-ship'
+            'ship-mount    ship-mount'
             'colorTitle   colorTitle'
             'colors       colors'
             'button       button'
@@ -76,6 +77,23 @@
         }
         & .categoriesStyle {
             grid-area: categories;
+        }
+
+        & .freeShip {
+            grid-area: free-ship;
+        }
+
+        & .shipMountContainer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            grid-area: ship-mount;
+
+            & input {
+                margin: 1rem;
+                max-width: 8rem;
+                border-bottom: 1px solid var(--main);
+            }
         }
 
         & > button {

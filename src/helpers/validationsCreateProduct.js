@@ -12,6 +12,7 @@ export const validationsCreateProduct = form => {
 
     if (form.categories === '' || form.categories === '---') {
         errors.categories = 'Seleccione una categoria'
+        console.log(form.categories)
     }
     if (form.freeShip === '' || form.freeShip === '---') {
         errors.freeShip = 'Seleccione el tipo de envio'

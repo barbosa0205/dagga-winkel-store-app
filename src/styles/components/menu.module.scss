@@ -11,6 +11,7 @@
 @media (min-width: 600px) {
     .menuContainer {
         flex-direction: row;
-        width: auto;
+        flex-wrap: wrap;
+        max-width: 60rem;
     }
 }

@@ -106,5 +106,11 @@
                 border-bottom: 1px solid var(--light-gray);
             }
         }
+        @media (min-width: 900px) {
+            left: 10rem;
+        }
+        @media (min-width: 1200px) {
+            left: 15rem;
+        }
     }
 }

@@ -9,6 +9,7 @@ export const CartProvider = ({ children }) => {
     //states
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
+    const [lastProductsView, setLastProductsView] = useState(null)
 
     //effects
     useEffect(() => {
@@ -17,8 +18,11 @@ export const CartProvider = ({ children }) => {
 
     const contextValue = {
         cart,
+        setCart,
         products,
         setProducts,
+        lastProductsView,
+        setLastProductsView,
     } //deberia ser memorizado, lo haremos despues cuando veamos la necesidad
 
     return (

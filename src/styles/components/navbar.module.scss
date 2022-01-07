@@ -17,6 +17,23 @@
         align-items: center;
         width: 100%;
         margin-bottom: 2rem;
+
+        & .cartIcon {
+            position: relative;
+        }
+        & .notify {
+            text-align: center;
+            position: absolute;
+            top: -1rem;
+            width: 2rem;
+            height: 2rem;
+            right: -0.5rem;
+            border-radius: 1rem;
+            background: var(--warning);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--white);
+        }
     }
 }
 

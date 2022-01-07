@@ -57,7 +57,7 @@ export const Images = ({ images, setImages, imageErrors }) => {
             <ul className={`${imageContainer} ${imageErrors && errorImage}`}>
                 <Icon className="ri-add-line" onClick={toggleMenu} />
                 {images.map(({ image }) => (
-                    <div className={productImageContainer}>
+                    <div key={image} className={productImageContainer}>
                         <Icon
                             className={`ri-close-fill ${removeImage}`}
                             onClick={() => removeProductImage(image)}

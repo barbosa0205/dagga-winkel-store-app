@@ -7,10 +7,9 @@ import { categories } from '../db/categories.api'
 import { getProductsByCategory } from '../firebase/helpers/readData'
 
 export const MainPage = () => {
-    const { products } = useCart()
+    const { products, lastProductsView } = useCart()
 
-    const [lastProductsView, setLastProductsView] = useState(null)
-    const [newVideoGames, setNewVideoGames] = useState(null)
+    const [newVideoGames, setNewVideoGames] = useState([])
 
     useEffect(() => {
         getProductsByCategory('consolas_videojuegos', setNewVideoGames)
@@ -33,10 +32,12 @@ export const MainPage = () => {
                 title="Agregados Recientemente"
                 products={products}
             />
-            <ProductsPreview
-                title="Nuevo en videojuegos"
-                products={newVideoGames}
-            />
+            {newVideoGames.length ? (
+                <ProductsPreview
+                    title="Nuevo en videojuegos"
+                    products={newVideoGames}
+                />
+            ) : null}
         </>
     )
 }
