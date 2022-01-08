@@ -13,6 +13,9 @@ export const MainPage = () => {
 
     useEffect(() => {
         getProductsByCategory('consolas_videojuegos', setNewVideoGames)
+        return () => {
+            setNewVideoGames([])
+        }
     }, [])
 
     return (

@@ -19,7 +19,8 @@
             grid-template-areas:
                 'close close close close'
                 'image image title title'
-                'image image price ship';
+                'image image price ship'
+                '.     .     .   qty';
             width: 100%;
             margin-top: 0.5rem;
             padding: 1rem;
@@ -90,6 +91,31 @@
                     color: var(--main);
 
                     @media (min-width: 600px) {
+                        font-size: 2.3rem;
+                    }
+                }
+            }
+
+            & .qtyContainer {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                grid-area: qty;
+                & > p {
+                    font-size: 1.8rem;
+                }
+                & > span {
+                    font-size: 1.8rem;
+                    margin-left: 1rem;
+                    font-weight: 500;
+                }
+
+                @media (min-width: 600px) {
+                    & > p {
+                        font-size: 2.3rem;
+                    }
+                    & > span {
                         font-size: 2.3rem;
                     }
                 }

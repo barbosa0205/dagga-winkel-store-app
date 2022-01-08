@@ -16,13 +16,13 @@ export const categories = [
         category_id: nanoid(),
         category_icon: 'ri-game-line',
         category_value: 'consolas_videojuegos',
-        category_name: 'Consolas y videojuegos',
+        category_name: 'Consolas & Videojuegos',
     },
     {
         category_id: nanoid(),
         category_icon: 'fas fa-bicycle',
         category_value: 'bicicletas_patines',
-        category_name: 'Bicicletas y patines',
+        category_name: 'Bicicletas & Patines',
     },
     {
         category_id: nanoid(),
@@ -30,4 +30,10 @@ export const categories = [
         category_value: 'joyeria',
         category_name: 'Joyeria',
     },
+    // {
+    //     category_id: nanoid(),
+    //     category_icon: 'ri-book-2-line',
+    //     category_value: 'libros_comics',
+    //     category_name: 'Libros & Comics',
+    // },
 ]

@@ -16,6 +16,7 @@ import {
     productShip,
     totalContainer,
     shipMountContainer,
+    qtyContainer,
 } from '../styles/pages/cartPage.module.scss'
 export const CartPage = () => {
     const { cart, setCart } = useCart()
@@ -23,8 +24,8 @@ export const CartPage = () => {
     const [totalMount, setTotalMount] = useState(0)
     useEffect(() => {
         const array = []
-        cart.map(({ price }) => {
-            array.push(price)
+        cart.map(({ price, qty, ship_mount }) => {
+            return array.push(price * qty + ship_mount)
         })
         setPrices(array)
     }, [cart])
@@ -33,8 +34,18 @@ export const CartPage = () => {
         prices.length && setTotalMount(prices.reduce((prev, acc) => prev + acc))
     }, [prices])
 
-    const removeProduct = id => {
-        setCart(cart.filter(p => p.id !== id))
+    const removeProduct = (id, qty) => {
+        if (qty <= 1) {
+            setCart(cart.filter(p => p.id !== id))
+        } else {
+            const productFiltered = cart.find(p => p.id === id)
+            console.log(productFiltered)
+            const newQty = productFiltered.qty - 1
+            console.log(newQty)
+            productFiltered.qty = newQty
+            const arrayFiltered = cart.filter(p => p.id !== id)
+            setCart([...arrayFiltered, productFiltered])
+        }
     }
 
     return (
@@ -59,7 +70,10 @@ export const CartPage = () => {
                                         <Icon
                                             className="ri-close-fill"
                                             onClick={() =>
-                                                removeProduct(product.id)
+                                                removeProduct(
+                                                    product.id,
+                                                    product.qty
+                                                )
                                             }
                                         />
                                     </div>
@@ -86,6 +100,10 @@ export const CartPage = () => {
                                             </p>
                                         </div>
                                     )}
+                                    <div className={qtyContainer}>
+                                        <p>Cantidad: </p>
+                                        <span>{product.qty}</span>
+                                    </div>
                                 </article>
                             )
                         })}

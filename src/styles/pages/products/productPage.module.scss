@@ -77,11 +77,19 @@ main {
             font-weight: 400;
             margin: 0 1rem;
         }
-        & > .freeShip {
+        & > .freeShip,
+        .shipMount {
             font-size: 1.8rem;
             font-weight: 500;
             color: var(--main);
             margin: 0 1rem;
+        }
+        & > .shipMount {
+            font-weight: 400;
+            color: var(--dark);
+            & > span {
+                font-weight: 500;
+            }
         }
     }
 

@@ -7,6 +7,8 @@ import { useAuth } from '../../contexts/auth/useAuth'
 import { useCart } from '../../contexts/cart/useCart'
 import { getProductById } from '../../firebase/helpers/readData'
 import { routes } from '../../helpers/routes'
+import { Howl, Howler } from 'howler'
+import AudiocartSound from '../../assets/sfx-magic14.mp3'
 
 import {
     imageList,
@@ -18,12 +20,16 @@ import {
     buttonContainer,
     cartButton,
     added,
-    productAddedContainer,
+    shipMount,
 } from '../../styles/pages/products/productPage.module.scss'
 
 export const ProductPage = () => {
+    const cartSound = new Howl({
+        src: [AudiocartSound],
+    })
+    Howler.volume(0.5)
     const { user } = useAuth()
-    const { setCart } = useCart()
+    const { cart, setCart } = useCart()
     const history = useHistory()
     const location = useLocation()
     const [productId, setProductId] = useState(location.pathname.slice(10))
@@ -41,17 +47,56 @@ export const ProductPage = () => {
         }
     }, [product])
 
+    useEffect(() => {}, [productAdded])
+
     const showImg = img => {
         setMainImage(img)
     }
 
+    const productAlreadyExist = id => {
+        const productExist = cart.filter(p => p.id === id)
+        console.log(productExist)
+        if (productExist.length >= 1) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     const addProductToCart = product => {
-        if (user?.role) {
-            setCart(c => [...c, product])
-            setProductAdded(true)
+        const alreadyExist = productAlreadyExist(product.id)
+        setProductAdded(true)
+        if (alreadyExist) {
+            const cartProduct = cart.find(p => p.id === product.id)
+            const newQty = cartProduct.qty + 1
+            console.log(product)
+            const arrayFilter = cart.filter(({ id }) => id !== product.id)
+
+            const newProductArray = [
+                ...arrayFilter,
+                { ...product, qty: newQty },
+            ]
+            setCart(newProductArray)
+            cartSound.play()
             setTimeout(() => {
                 setProductAdded(false)
-            }, 1500)
+            }, 600)
+            return
+        }
+        if (user?.role) {
+            setProductAdded(true)
+            setCart(c => [
+                ...c,
+                {
+                    ...product,
+                    qty: 1,
+                },
+            ])
+            cartSound.play()
+
+            setTimeout(() => {
+                setProductAdded(false)
+            }, 600)
         } else {
             history.push(routes.login)
         }
@@ -68,9 +113,14 @@ export const ProductPage = () => {
                         alt={product?.product_name}
                     />
                     <section className={infoContainer}>
-                        <h2 className={price}>${product?.price} MXN</h2>
-                        {product?.free_shipping === 'true' && (
+                        <h2 className={price}>{`$${product?.price} MXN`}</h2>
+                        {product?.free_shipping === 'true' ? (
                             <p className={freeShip}>Envio gratis</p>
+                        ) : (
+                            <p className={shipMount}>
+                                {`Costo de envio: `}{' '}
+                                <span>{`$${product.ship_mount} MXN`}</span>
+                            </p>
                         )}
                     </section>
                     <ul className={imageList}>
