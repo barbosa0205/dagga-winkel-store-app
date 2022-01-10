@@ -23,4 +23,14 @@
     gap: 3rem 1rem;
     width: 100%;
     max-width: 450px;
+
+    & > div {
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &:hover {
+            color: var(--main);
+            transition: 0.2s ease;
+        }
+    }
 }

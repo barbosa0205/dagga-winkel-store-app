@@ -13,6 +13,7 @@ import { ProductsSearchedPage } from '../pages/products/ProductsSearchedPage'
 import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
 import { CategoriesPage } from '../pages/CategoriesPage'
+import { CategoryPage } from '../pages/CategoryPage'
 
 export const MainRoutes = () => {
     return (
@@ -38,19 +39,21 @@ export const MainRoutes = () => {
                     component={CartPage}
                 />
                 <Route
-                    hasRole={roles.client}
                     exact
                     path={routes.categories}
                     component={CategoriesPage}
                 />
                 <Route
-                    hasRole={roles.client}
+                    exact
+                    path={routes.category(':id')}
+                    component={CategoryPage}
+                />
+                <Route
                     exact
                     path={routes.product(':id')}
                     component={ProductPage}
                 />
                 <Route
-                    hasRole={roles.client}
                     exact
                     path={routes.search(':id')}
                     component={ProductsSearchedPage}

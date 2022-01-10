@@ -5,9 +5,17 @@ import {
     category,
 } from '../styles/components/category.module.scss'
 
-export const Category = ({ categoryIcon, categoryName }) => {
+import { useHistory } from 'react-router-dom'
+import { routes } from '../helpers/routes'
+
+export const Category = ({ categoryIcon, categoryName, To }) => {
+    const history = useHistory()
+
     return (
-        <div className={`${categoryContainer}`}>
+        <div
+            className={`${categoryContainer}`}
+            onClick={() => history.push(routes.category(To))}
+        >
             <i className={`${categoryIcon} ${category}`}></i>
             <p>{categoryName}</p>
         </div>
