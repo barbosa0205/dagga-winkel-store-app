@@ -60,21 +60,17 @@ export const Colors = ({ color, setColor }) => {
                 />
                 {color.length
                     ? color.map(c => (
-                          <>
-                              <i
-                                  key={c.colorId}
-                                  style={{ background: c.color }}
-                                  className={colorSquare}
-                                  title={c.color_name}
-                              >
-                                  <Icon
-                                      className={`ri-close-fill ${removeColor}`}
-                                      onClick={() =>
-                                          removeProductColor(c.colorId)
-                                      }
-                                  />
-                              </i>
-                          </>
+                          <i
+                              key={c.colorId}
+                              style={{ background: c.color }}
+                              className={colorSquare}
+                              title={c.color_name}
+                          >
+                              <Icon
+                                  className={`ri-close-fill ${removeColor}`}
+                                  onClick={() => removeProductColor(c.colorId)}
+                              />
+                          </i>
                       ))
                     : null}
             </ul>

@@ -35,13 +35,23 @@ export const CartPage = () => {
     }, [prices])
 
     const removeProduct = (id, qty) => {
-        if (qty <= 1) {
+        setCart(cart.filter(p => p.id !== id))
+    }
+
+    const incrementQty = id => {
+        const productFiltered = cart.find(p => p.id === id)
+        const newQty = productFiltered.qty + 1
+        productFiltered.qty = newQty
+        const arrayFiltered = cart.filter(p => p.id !== id)
+        setCart([...arrayFiltered, productFiltered])
+    }
+
+    const decrementQty = id => {
+        const productFiltered = cart.find(p => p.id === id)
+        const newQty = productFiltered.qty - 1
+        if (newQty === 0) {
             setCart(cart.filter(p => p.id !== id))
         } else {
-            const productFiltered = cart.find(p => p.id === id)
-            console.log(productFiltered)
-            const newQty = productFiltered.qty - 1
-            console.log(newQty)
             productFiltered.qty = newQty
             const arrayFiltered = cart.filter(p => p.id !== id)
             setCart([...arrayFiltered, productFiltered])
@@ -102,7 +112,21 @@ export const CartPage = () => {
                                     )}
                                     <div className={qtyContainer}>
                                         <p>Cantidad: </p>
-                                        <span>{product.qty}</span>
+                                        <span>
+                                            <Icon
+                                                className="ri-indeterminate-circle-line"
+                                                onClick={() =>
+                                                    decrementQty(product.id)
+                                                }
+                                            />
+                                            {product.qty}
+                                            <Icon
+                                                className="ri-add-circle-line"
+                                                onClick={() =>
+                                                    incrementQty(product.id)
+                                                }
+                                            />
+                                        </span>
                                     </div>
                                 </article>
                             )

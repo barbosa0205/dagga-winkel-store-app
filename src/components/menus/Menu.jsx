@@ -7,7 +7,6 @@ export const Menu = () => {
         <div className={menuContainer}>
             <AsideItem to="/" text="Inicio" />
             <AsideItem to="/categories" text="Todas las categorias" />
-            <AsideItem to="/offers" text="Ofertas" />
         </div>
     )
 }

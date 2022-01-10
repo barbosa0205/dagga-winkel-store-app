@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { readData } from '../../firebase/helpers/readData'
+import { getRecentProducts, readData } from '../../firebase/helpers/readData'
 
 //Creamos nuestro contexto
 export const CartContext = createContext()
@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
 
     //effects
     useEffect(() => {
-        readData(setProducts, 'products')
+        getRecentProducts(setProducts, 'products')
     }, [])
 
     const contextValue = {

@@ -12,6 +12,7 @@ import { ProductPage } from '../pages/products/ProductPage'
 import { ProductsSearchedPage } from '../pages/products/ProductsSearchedPage'
 import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
+import { CategoriesPage } from '../pages/CategoriesPage'
 
 export const MainRoutes = () => {
     return (
@@ -35,6 +36,12 @@ export const MainRoutes = () => {
                     exact
                     path={routes.cart}
                     component={CartPage}
+                />
+                <Route
+                    hasRole={roles.client}
+                    exact
+                    path={routes.categories}
+                    component={CategoriesPage}
                 />
                 <Route
                     hasRole={roles.client}

@@ -1,0 +1,32 @@
+.categoriesContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 14rem;
+        max-width: 20rem;
+        height: 9rem;
+        margin: 1rem;
+        border-radius: 1rem;
+        border: 2px solid var(--light-gray);
+        color: var(--main);
+        transition: 0.2s ease;
+
+        & > p {
+            max-width: 10rem;
+            font-size: 1.4rem;
+        }
+
+        &:hover {
+            transform: scale(1.15);
+            transition: 0.2s ease;
+        }
+    }
+}
