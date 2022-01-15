@@ -162,7 +162,7 @@ export const AuthProvider = ({ token, setToken, children }) => {
     const logout = () => {
         setUser(null)
         setToken('')
-        localStorage.clear()
+        localStorage.removeItem('user-dagga-winkel')
     }
 
     const isLogged = () => !!user

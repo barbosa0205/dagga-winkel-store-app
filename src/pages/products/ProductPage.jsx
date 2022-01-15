@@ -22,6 +22,7 @@ import {
     added,
     shipMount,
 } from '../../styles/pages/products/productPage.module.scss'
+import { stringify } from '@firebase/util'
 
 export const ProductPage = () => {
     const cartSound = new Howl({
@@ -36,6 +37,11 @@ export const ProductPage = () => {
     const [product, setProduct] = useState(null)
     const [mainImage, setMainImage] = useState('')
     const [productAdded, setProductAdded] = useState(false)
+
+    useEffect(() => {
+        return () => {}
+    }, [productId])
+
     useEffect(() => {
         getProductById(productId, setProduct)
     }, [productId])

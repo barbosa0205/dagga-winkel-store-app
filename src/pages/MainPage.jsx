@@ -7,7 +7,7 @@ import { categories } from '../db/categories.api'
 import { getProductsByCategory } from '../firebase/helpers/readData'
 
 export const MainPage = () => {
-    const { products, lastProductsView } = useCart()
+    const { products, lastProductsView, setLastProductsView } = useCart()
 
     const [newVideoGames, setNewVideoGames] = useState([])
 
@@ -16,6 +16,13 @@ export const MainPage = () => {
         return () => {
             setNewVideoGames([])
         }
+    }, [])
+
+    useEffect(() => {
+        localStorage.getItem('view-recently') &&
+            setLastProductsView(localStorage.getItem('view-recently'))
+
+        return () => {}
     }, [])
 
     return (
